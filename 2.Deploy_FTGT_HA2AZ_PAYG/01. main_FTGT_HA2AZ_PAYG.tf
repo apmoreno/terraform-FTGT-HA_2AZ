@@ -29,7 +29,7 @@ resource "aws_cloudformation_stack" "FTGT-HA2AZ_PAYG" {
 	"S3EndpointDeployment" = "${var.tf_S3EndpointDeployment}"
 	"PublicSubnet2RouteTableID" = "${var.tf_PublicSubnet2RouteTableID}"
 	"InitS3Bucket" = "${var.tf_InitS3Bucket}"
-	"InitS3BucketRegion" = "${var.tf_InitS3BucketRegion}"
+	"InitS3BucketRegion" = "${var.region}"
 	"LicenseType" = "${var.tf_LicenseType}"
 	"FortiGate1LicenseFile" = "${var.tf_FortiGate1LicenseFile}"
 	"FortiGate2LicenseFile" = "${var.tf_FortiGate2LicenseFile}"

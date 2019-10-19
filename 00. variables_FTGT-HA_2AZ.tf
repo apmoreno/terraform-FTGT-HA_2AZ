@@ -89,12 +89,12 @@ variable "tf_CIDRForInstanceAccess" {
         
 variable "tf_AZForFGT1" {
 			type = string
-            default = "${var.tf_AZForSubnet1}"
+            default = ""
 			description =  "Select an Availability Zone for FortiGate1"
 		}
 variable "tf_AZForFGT2" {
 			type = string
-            default = "${var.tf_AZForSubnet2}"
+            default = ""
 			description =  "Select an Availability Zone for FortiGate2"
         }
 variable "tf_KeyPair" {
@@ -125,7 +125,7 @@ variable "tf_InitS3Bucket" {
         
 variable "tf_InitS3BucketRegion" {
 			type = string
-            default = "${var.region}"
+            default = ""
 			description =  "Select the Region where the Init S3 Bucket exists *** the bucket should exist in the same region as this deployment for successful bootstrapping ***"
 			
 		}
@@ -140,10 +140,12 @@ variable "tf_LicenseType" {
         
 variable "tf_FortiGate1LicenseFile" {
 			type = string
+            default =  ""
 			description =  "[BYOL Only leave blank for PAYG] Provide the name of the BYOL license file in the Init S3 Bucket for FortiGate1 (ie fgt1.lic or prefix/fgt1.lic)"
 		}
 variable "tf_FortiGate2LicenseFile" {
 			type = string
+            default =  ""
 			description =  "[BYOL Only leave blank for PAYG] Provide the name of the BYOL license file in the Init S3 Bucket for FortiGate2 (ie fgt2.lic or prefix/fgt2.lic)"
 		}
                      
