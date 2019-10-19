@@ -1,0 +1,82 @@
+config system global
+set hostname Fgt1
+set admintimeout 60
+end
+config system settings
+set allow-subnet-overlap enable
+end
+config system interface
+edit port1
+set alias public
+set mode static
+set ip 10.0.1.10/24
+set allowaccess ping https ssh fgfm
+set secondary-IP enable
+next
+edit port2
+set alias private
+set mode static
+set ip 10.0.2.10/24
+set allowaccess ping
+set mtu-override enable
+set mtu 9001
+next
+edit port3
+set alias hasync
+set mode static
+set ip 10.0.3.10/24
+set allowaccess ping
+set mtu-override enable
+set mtu 9001
+next
+edit port4
+set alias hamgmt
+set mode static
+set ip 10.0.4.10/24
+set allowaccess ping https ssh
+set mtu-override enable
+set mtu 9001
+next
+end
+config router static
+edit 1
+set device port1
+set gateway 10.0.1.1
+next
+edit 2
+set dst 10.0.0.0/16
+set device port2
+set gateway 10.0.2.1
+next
+end
+config firewall policy
+edit 1
+set name outbound-all
+set srcintf port2
+set dstintf port1
+set srcaddr all
+set dstaddr all
+set action accept
+set schedule always
+set service ALL
+set logtraffic all
+set nat enable
+next
+end
+config system ha
+set group-name group1
+set mode a-p
+set hbdev port3 50
+set session-pickup enable
+set ha-mgmt-status enable
+config ha-mgmt-interface
+edit 1
+set interface port4
+set gateway 10.0.4.1
+next
+end
+set override disable
+set priority 255
+set unicast-hb enable
+set unicast-hb-peerip 10.0.30.10
+end
