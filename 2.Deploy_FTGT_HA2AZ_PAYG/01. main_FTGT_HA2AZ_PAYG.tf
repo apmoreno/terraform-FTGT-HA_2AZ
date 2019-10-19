@@ -1,6 +1,6 @@
-#Need to have copied CloudFormation templates etc into S3 bucket in AWS, which should be made public
+#Need to have copied CloudFormation templates etc into S3 bucket in AWS which should be made public
 #Need to have an ongoing subscription to FortiGate on-demand (PAYG) in AWS Marketplace
-#Need to have deployed VPC, with 4 Subnets using module "Deploy_VPC"
+#Need to have deployed VPC with 4 Subnets using module "Deploy_VPC"
 
 #Retrieve existing VPC id
 data "aws_vpc" "existing_VPC" {
@@ -13,8 +13,6 @@ resource "aws_cloudformation_stack" "FTGT-HA2AZ_PAYG" {
   parameters = {
     "VPCID" = "${data.aws_vpc.existing_VPC.id}"
     "VPCCIDR" = "${var.tf_VPCCIDR}"
-    "AZForSubnet1" = "${var.tf_AZForSubnet1}"
-    "AZForSubnet2" = "${var.tf_AZForSubnet2}"
     "PublicSubnet1" = "${var.tf_PublicSubnet1}"
     "PrivateSubnet1"= "${var.tf_PrivateSubnet1}"
     "HASyncSubnet1" = "${var.tf_HASyncSubnet1}"
@@ -23,13 +21,38 @@ resource "aws_cloudformation_stack" "FTGT-HA2AZ_PAYG" {
     "PrivateSubnet2" = "${var.tf_PrivateSubnet2}"
     "HASyncSubnet2" = "${var.tf_HASyncSubnet2}"
     "HAMgmtSubnet2" = "${var.tf_HAMgmtSubnet2}"
-  
+    "InstanceType" = "${var.tf_InstanceType}"
+	"CIDRForInstanceAccess" = "${var.tf_CIDRForInstanceAccess}"
+    "AZForFGT1" = "${var.tf_AZForSubnet1}"
+    "AZForFGT2" = "${var.tf_AZForSubnet2}"
+    "KeyPair" = "${var.tf_KeyPair}"
+	"S3EndpointDeployment" = "${var.tf_S3EndpointDeployment}"
+	"PublicSubnet2RouteTableID" = "${var.tf_PublicSubnet2RouteTableID}"
+	"InitS3Bucket" = "${var.tf_InitS3Bucket}"
+	"InitS3BucketRegion" = "${var.tf_InitS3BucketRegion}"
+	"LicenseType" = "${var.tf_LicenseType}"
+	"FortiGate1LicenseFile" = "${var.tf_FortiGate1LicenseFile}"
+	"FortiGate2LicenseFile" = "${var.tf_FortiGate2LicenseFile}"
+	"PublicSubnet1RouterIP" = "${var.tf_PublicSubnet1RouterIP}"
+	"PrivateSubnet1RouterIP" = "${var.tf_PrivateSubnet1RouterIP}"
+	"HAMgmtSubnet1RouterIP" = "${var.tf_HAMgmtSubnet1RouterIP}"
+	"PublicSubnet2RouterIP" = "${var.tf_PublicSubnet2RouterIP}"
+	"PrivateSubnet2RouterIP" = "${var.tf_PrivateSubnet2RouterIP}"
+	"HAMgmtSubnet2RouterIP" = "${var.tf_HAMgmtSubnet2RouterIP}"
+    "FortiGate1PublicIP" = "${var.tf_FortiGate1PublicIP}"
+	"FortiGate1PrivateIP" = "${var.tf_FortiGate1PrivateIP}"
+	"FortiGate1HAsyncIP" = "${var.tf_FortiGate1HAsyncIP}"
+	"FortiGate1HAmgmtIP" = "${var.tf_FortiGate1HAmgmtIP}"
+    "FortiGate2PublicIP" = "${var.tf_FortiGate2PublicIP}"
+	"FortiGate2PrivateIP" = "${var.tf_FortiGate2PrivateIP}"
+	"FortiGate2HAsyncIP" = "${var.tf_FortiGate2HAsyncIP}"
+	"FortiGate2HAmgmtIP" = "${var.tf_FortiGate2HAmgmtIP}"
   }
   
   on_failure = "ROLLBACK"
   
   capabilities = [
-  "CAPABILITY_IAM", 
+  "CAPABILITY_IAM" 
   "CAPABILITY_AUTO_EXPAND"
   ]
   

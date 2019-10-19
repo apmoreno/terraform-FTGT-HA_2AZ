@@ -76,3 +76,145 @@ variable "tf_HAMgmtSubnet2" {
 			default = "10.0.40.0/24"
 			description = "Provide a network CIDR for HAMgmtSubnet2"
         }
+#######################################################################        
+variable "tf_InstanceType" {
+			default =  "c5.xlarge"
+			description = "Select the instance type for the FortiGates"
+		}
+variable "tf_CIDRForInstanceAccess" {
+			type = string
+			default = "0.0.0.0/0"
+			description = "Provide a network CIDR from which the FortiGate instances will be accessed"
+		}
+        
+variable "tf_AZForFGT1" {
+			type = string
+            default = "${var.tf_AZForSubnet1}"
+			description =  "Select an Availability Zone for FortiGate1"
+		}
+variable "tf_AZForFGT2" {
+			type = string
+            default = "${var.tf_AZForSubnet2}"
+			description =  "Select an Availability Zone for FortiGate2"
+        }
+variable "tf_KeyPair" {
+            type        = string
+            default = "AWS-FTGT"
+            }
+            
+variable "tf_S3EndpointDeployment" {
+			type = string
+            default = ""
+			description =  "Select if a new S3 Endpoint should be deployed or not. *** A S3 Endpoint should be used and associated to both PublicSubnets for successful bootstrapping ***"
+#			"AllowedValues" 
+#				"DeployNew"
+#				"UseExisting"
+		}
+        
+variable "tf_PublicSubnet2RouteTableID" {
+			type = string
+            default = ""
+			description =  "If a new S3 Endpoint is to be deployed provide the route table ID associated to PublicSubnet2"
+		}
+
+variable "tf_InitS3Bucket" {
+			type = string
+            default = ""
+			description =  "Provide the Init S3 Bucket name where your config files will be created"
+		}
+        
+variable "tf_InitS3BucketRegion" {
+			type = string
+            default = "${var.region}"
+			description =  "Select the Region where the Init S3 Bucket exists *** the bucket should exist in the same region as this deployment for successful bootstrapping ***"
+			
+		}
+variable "tf_LicenseType" {
+			type = string
+            default = "PAYG"
+			description =  "Select the license type for the FortiGates"
+#			"AllowedValues"
+#				"PAYG"
+#				"BYOL"
+		}
+        
+variable "tf_FortiGate1LicenseFile" {
+			type = string
+			description =  "[BYOL Only leave blank for PAYG] Provide the name of the BYOL license file in the Init S3 Bucket for FortiGate1 (ie fgt1.lic or prefix/fgt1.lic)"
+		}
+variable "tf_FortiGate2LicenseFile" {
+			type = string
+			description =  "[BYOL Only leave blank for PAYG] Provide the name of the BYOL license file in the Init S3 Bucket for FortiGate2 (ie fgt2.lic or prefix/fgt2.lic)"
+		}
+                     
+variable "tf_PublicSubnet1RouterIP" {
+			type = string
+			default =  "10.0.1.1"
+			description =  "Provide the IP address of the AWS intrinsic router (First IP from PublicSubnet1)"
+		}
+variable "tf_PrivateSubnet1RouterIP" {
+			type = string
+			default =  "10.0.2.1"
+			description =  "Provide the IP address of the AWS intrinsic router (First IP from PrivateSubnet1)"
+		}
+variable "tf_HAMgmtSubnet1RouterIP" {
+			type = string
+			default =  "10.0.4.1"
+			description =  "Provide the IP address of the AWS intrinsic router (First IP from HAMgmtSubnet1)"
+		}
+variable "tf_PublicSubnet2RouterIP" {
+			type = string
+			default =  "10.0.10.1"
+			description =  "Provide the IP address of the AWS intrinsic router (First IP from PublicSubnet2)"
+		}
+variable "tf_PrivateSubnet2RouterIP" {
+			type = string
+			default =  "10.0.20.1"
+			description =  "Provide the IP address of the AWS intrinsic router (First IP from PrivateSubnet2)"
+		}
+variable "tf_HAMgmtSubnet2RouterIP" {
+			type = string
+			default =  "10.0.40.1"
+			description =  "Provide the IP address of the AWS intrinsic router (First IP from HAMgmtSubnet2)"
+		}
+variable "tf_FortiGate1PublicIP" {
+			type = string
+			default =  "10.0.1.10/24"
+			description =  "Provide the IP address in CIDR form for the public interface of FortiGate1 (IP from PublicSubnet1)"
+		}
+variable "tf_FortiGate1PrivateIP" {
+			type = string
+			default =  "10.0.2.10/24"
+			description =  "Provide the IP address in CIDR form for the private interface of FortiGate1 (IP from PrivateSubnet1)"
+		}
+variable "tf_FortiGate1HAsyncIP" {
+			type = string
+			default =  "10.0.3.10/24"
+			description =  "Provide the IP address in CIDR form for the ha sync interface of FortiGate1 (IP from HASyncSubnet1)"
+		}
+variable "tf_FortiGate1HAmgmtIP" {
+			type = string
+			default =  "10.0.4.10/24"
+			description =  "Provide the IP address in CIDR form for the ha management interface of FortiGate1 (IP from HAMgmtSubnet1)"
+		}
+variable "tf_FortiGate2PublicIP" {
+			type = string
+			default =  "10.0.10.10/24"
+			description =  "Provide the IP address in CIDR form for the public interface of FortiGate2 (IP from PublicSubnet1)"
+		}
+variable "tf_FortiGate2PrivateIP" {
+			type = string
+			default =  "10.0.20.10/24"
+			description =  "Provide the IP address in CIDR form for the private interface of FortiGate2 (IP from PrivateSubnet1)"
+		}
+variable "tf_FortiGate2HAsyncIP" {
+			type = string
+			default =  "10.0.30.10/24"
+			description =  "Provide the IP address in CIDR form for the ha sync interface of FortiGate2 (IP from HASyncSubnet1)"
+		}
+variable "tf_FortiGate2HAmgmtIP" {
+			type = string
+			default =  "10.0.40.10/24"
+			description =  "Provide the IP address in CIDR form for the ha management interface of FortiGate2 (IP from HAMgmtSubnet1)"
+		}
+        

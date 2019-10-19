@@ -1,2 +1,7 @@
 
 .DS_Store
+.terraform/modules/modules.json
+.terraform/plugins/darwin_amd64/lock.json
+.terraform/plugins/darwin_amd64/terraform-provider-aws_v2.33.0_x4
+terraform.tfstate
+terraform.tfstate.backup

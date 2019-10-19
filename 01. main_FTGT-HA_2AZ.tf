@@ -13,7 +13,7 @@ terraform {
 
 module "Deploy_VPC" {
     
-  source = "./Deploy_VPC"
+  source = "./1.Deploy_VPC"
   region = "${var.region}"
   tf_VPCCIDR = "${var.tf_VPCCIDR}"
   tf_AZForSubnet1 = "${var.tf_AZForSubnet1}"
