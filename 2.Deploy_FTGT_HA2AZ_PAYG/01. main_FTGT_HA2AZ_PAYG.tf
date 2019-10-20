@@ -7,6 +7,36 @@ data "aws_vpc" "existing_VPC" {
   cidr_block = "${var.vpc_cidr}"
 }
 
+#use:
+#resource "aws_subnet" "example" {
+#  vpc_id            = "${data.aws_vpc.selected.id}"
+#  availability_zone = "us-west-2a"
+#  cidr_block        = "${cidrsubnet(data.aws_vpc.selected.cidr_block, 4, 1)}"
+#}
+
+
+tf_PublicSubnet2ID
+
+tf_PublicSubnet2RouteTableID
+
+
+data "aws_subnet_ids" "PublicSubnet2" {
+  vpc_id = "${data.aws_vpc.existing_VPC.id}"
+  tags = {
+#    Name = "FTGT-HA-2AZs-PublicSubnet2"
+    Name ="{$var.tf_StackLabel}-PublicSubnet2"
+}
+  
+  
+  #use: 
+  #resource "aws_instance" "app" {
+  #count         = "3"
+  #ami           = "${var.ami}"
+  #instance_type = "t2.micro"
+  #subnet_id     = "${element(data.aws_subnet_ids.private.ids, count.index)}"
+#}
+
+
 resource "aws_cloudformation_stack" "FTGT-HA2AZ_PAYG" {
   name = "VPC-FTGT-HA-2-AZs_PAYG"
 

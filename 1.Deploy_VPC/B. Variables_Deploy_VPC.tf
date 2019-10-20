@@ -3,6 +3,10 @@ variable "region" {
   default     = ""
 }
 
+variable "tf_StackLabel" {
+  type        = string
+		}
+        
 variable "tf_VPCCIDR" {
   type = "string"
 }

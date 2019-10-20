@@ -15,6 +15,7 @@ module "Deploy_VPC" {
     
   source = "./1.Deploy_VPC"
   region = "${var.region}"
+  tf_StackLabel = "${var.tf_StackLabel}"
   tf_VPCCIDR = "${var.tf_VPCCIDR}"
   tf_AZForSubnet1 = "${var.tf_AZForSubnet1}"
   tf_AZForSubnet2 = "${var.tf_AZForSubnet2}"

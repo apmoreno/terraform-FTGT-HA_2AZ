@@ -14,14 +14,19 @@ variable "region" {
   default     = "us-east-1"
 }
 
-variable "availability-zones" {
-  type = list(string)
-  default = [
-     "us-east-1a",
-    "us-east-1b"
-  ]
-}
+#variable "availability-zones" {
+#  type = list(string)
+#  default = [
+#     "us-east-1a",
+#    "us-east-1b"
+#  ]
+#}
 
+variable "tf_StackLabel" {
+			default = "FTGT-HA-2AZs"
+			description = "Name of the CloudFormation stack"
+		}
+  
 variable "tf_VPCCIDR" {
 			default = "10.0.0.0/16"
 			description = "Provide a network CIDR for the VPC"
@@ -76,7 +81,7 @@ variable "tf_HAMgmtSubnet2" {
 			default = "10.0.40.0/24"
 			description = "Provide a network CIDR for HAMgmtSubnet2"
         }
-#######################################################################        
+        
 variable "tf_InstanceType" {
 			default =  "c5.xlarge"
 			description = "Select the instance type for the FortiGates"
@@ -87,30 +92,38 @@ variable "tf_CIDRForInstanceAccess" {
 			description = "Provide a network CIDR from which the FortiGate instances will be accessed"
 		}
         
-variable "tf_AZForFGT1" {
-			type = string
-            default = ""
-			description =  "Select an Availability Zone for FortiGate1"
-		}
-variable "tf_AZForFGT2" {
-			type = string
-            default = ""
-			description =  "Select an Availability Zone for FortiGate2"
-        }
+#variable "tf_AZForFGT1" {
+#			type = string
+#            default = ""
+#			description =  "Select an Availability Zone for FortiGate1"
+#		}
+#variable "tf_AZForFGT2" {
+#			type = string
+#            default = ""
+#			description =  "Select an Availability Zone for FortiGate2"
+#}
+
 variable "tf_KeyPair" {
             type        = string
             default = "AWS-FTGT"
             }
-            
+
+#######################################################################        
 variable "tf_S3EndpointDeployment" {
 			type = string
-            default = ""
+            default = "DeployNew"
 			description =  "Select if a new S3 Endpoint should be deployed or not. *** A S3 Endpoint should be used and associated to both PublicSubnets for successful bootstrapping ***"
 #			"AllowedValues" 
 #				"DeployNew"
 #				"UseExisting"
 		}
         
+variable "tf_PublicSubnet2ID" {
+			type = string
+            default = ""
+			description =  "If a new S3 Endpoint is to be deployed, identify the ID of PublicSubnet2 asa 1st step to get the associated route table ID"
+		}
+
 variable "tf_PublicSubnet2RouteTableID" {
 			type = string
             default = ""
@@ -148,7 +161,9 @@ variable "tf_FortiGate2LicenseFile" {
             default =  ""
 			description =  "[BYOL Only leave blank for PAYG] Provide the name of the BYOL license file in the Init S3 Bucket for FortiGate2 (ie fgt2.lic or prefix/fgt2.lic)"
 		}
-                     
+         
+#######################################################################        
+
 variable "tf_PublicSubnet1RouterIP" {
 			type = string
 			default =  "10.0.1.1"

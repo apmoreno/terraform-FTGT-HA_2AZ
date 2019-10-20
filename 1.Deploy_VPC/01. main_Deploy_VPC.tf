@@ -2,7 +2,7 @@
 #Need to have an ongoing subscription to FortiGate on-demand (PAYG) in AWS Marketplace
 
 resource "aws_cloudformation_stack" "VPC_for_FTGT-HA2AZ" {
-  name = "FTGT-HA-2AZs"
+  name = "${var.tf_StackLabel}"
 
   parameters = {
     "VPCCIDR" = "${var.tf_VPCCIDR}"
