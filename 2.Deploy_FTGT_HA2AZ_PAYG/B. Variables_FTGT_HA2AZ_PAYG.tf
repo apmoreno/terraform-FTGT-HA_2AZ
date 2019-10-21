@@ -51,8 +51,10 @@ variable "tf_HAMgmtSubnet2" {
   type = "string"
 }
 
-variable "tf_InstanceType {}
-		}
+variable "tf_InstanceType" {
+  type = "string"
+}
+		
 variable "tf_CIDRForInstanceAccess" {
 			type = string
 			}
@@ -72,9 +74,9 @@ variable "tf_S3EndpointDeployment" {
             default = ""
 		}
         
-variable "tf_PublicSubnet2RouteTableID" {
-			type = string
-		}
+#variable "tf_PublicSubnet2RouteTableID" {
+#			type = string
+#		}
 
 variable "tf_InitS3Bucket" {
 			type = string
