@@ -5,7 +5,7 @@
 #First step to get the id of the Route Table for PublicSubnet2, this is a parameter used in th CloudFormation stack.
 #1. Retrieve existing VPC id, 2.retrieve id of all subnets in the VPC, 3.retrive the id of PublicSubnet2, 4.retrieve the id of the route table for this subnet.
 
-data "aws_vpc" "existing_VPC" {
+data "aws_vpc" "tf_existing_VPC" {
   cidr_block = "${var.tf_VPCCIDR}"
 }
 
@@ -16,8 +16,8 @@ data "aws_vpc" "existing_VPC" {
 #  cidr_block        = "${cidrsubnet(data.aws_vpc.selected.cidr_block, 4, 1)}"
 #}
 
-data "aws_subnet_ids" "PublicSubnet2" {
-  vpc_id = "${data.aws_vpc.existing_VPC.id}"
+data "aws_subnet_ids" "tf_PublicSubnet2" {
+  vpc_id = "${data.aws_vpc.tf_existing_VPC.id}"
   tags = {
 #    Name = "FTGT-HA-2AZs-PublicSubnet2"
     Name ="{$var.tf_StackLabel}-PublicSubnet2"
@@ -32,8 +32,8 @@ data "aws_subnet_ids" "PublicSubnet2" {
 #subnet_id     = "${element(data.aws_subnet_ids.private.ids, count.index)}"
 #}
 
-data "aws_route_table" "PublicSubnet2RouteTableID" {
-  subnet_id = "${element(data.aws_subnet_ids.PublicSubnet2.ids, 1)}"
+data "aws_route_table" "tf_PublicSubnet2RouteTableID" {
+  subnet_id = "${element(data.aws_subnet_ids.tf_PublicSubnet2.ids, 1)}"
 }
 
 #data "aws_route_table" "selected" {
@@ -62,10 +62,10 @@ output "filter_name_for_PublicSubnet2" {
   value = "{$var.tf_StackLabel}-PublicSubnet2"
 }
 output "id_of_PublicSubnet2" {
-  value = "${element(data.aws_subnet_ids.PublicSubnet2.ids, 1)}"
+  value = "${element(data.aws_subnet_ids.tf_PublicSubnet2.ids, 1)}"
 }
 output "id_of_PublicSubnet2RouteTableID" {
-  value = "${data.aws_route_table.PublicSubnet2RouteTableID}"
+  value = "${data.aws_route_table.tf_PublicSubnet2RouteTableID}"
 }
 ########################
 
@@ -89,7 +89,7 @@ resource "aws_cloudformation_stack" "FTGT-HA2AZ_PAYG" {
     "AZForFGT2" = "${var.tf_AZForSubnet2}"
     "KeyPair" = "${var.tf_KeyPair}"
 	"S3EndpointDeployment" = "${var.tf_S3EndpointDeployment}"
-	"PublicSubnet2RouteTableID" = "${data.aws_route_table.PublicSubnet2RouteTableID}"
+	"PublicSubnet2RouteTableID" = "${data.aws_route_table.tf_PublicSubnet2RouteTableID}"
 	"InitS3Bucket" = "${var.tf_InitS3Bucket}"
 	"InitS3BucketRegion" = "${var.region}"
 	"LicenseType" = "${var.tf_LicenseType}"

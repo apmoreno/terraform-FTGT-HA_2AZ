@@ -10,3 +10,6 @@
 #  value = "${aws_subnet.PrivateSubnet.id}"
 #}
 
+#output "tf_PublicSubnet2RouteTableID" {
+#    value = "${data.aws_route_table.tf_PublicSubnet2RouteTableID}"
+#}

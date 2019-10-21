@@ -5,25 +5,59 @@
 #First step to get the id of the Route Table for PublicSubnet2, this is a parameter used in th CloudFormation stack.
 #1. Retrieve existing VPC id, 2.retrieve id of all subnets in the VPC, 3.retrive the id of PublicSubnet2, 4.retrieve the id of the route table for this subnet.
 
-data "aws_vpc" "existing_VPC" {
-  cidr_block = "${var.tf_VPCCIDR}"
+data "aws_vpcs" "foo" {
+  #tags = {
+ #   service = "production"
+ # }
 }
 
-#use:
-#resource "aws_subnet" "example" {
-#  vpc_id            = "${data.aws_vpc.selected.id}"
-#  availability_zone = "us-west-2a"
-#  cidr_block        = "${cidrsubnet(data.aws_vpc.selected.cidr_block, 4, 1)}"
+output "foo" {
+  value = "${data.aws_vpcs.foo.ids}"
+}
+
+
+#data "aws_vpc" "tf_existing_VPC" {
+  #cidr_block = "${var.tf_VPCCIDR}"
+  #cidr_block = "10.0.0.0/16"
+##}
+
+#data "aws_subnet_ids" "tf_PublicSubnet2" {
+ # vpc_id = "${data.aws_vpc.tf_existing_VPC.id}"
+#  tags = {
+##    Name = "FTGT-HA-2AZs-PublicSubnet2"
+#    Name ="{$var.tf_StackLabel}-PublicSubnet2"
+#}
 #}
 
-data "aws_subnet_ids" "PublicSubnet2" {
-  vpc_id = "${data.aws_vpc.existing_VPC.id}"
-  tags = {
-#    Name = "FTGT-HA-2AZs-PublicSubnet2"
-    Name ="{$var.tf_StackLabel}-PublicSubnet2"
-}
-}
-   
+#data "aws_route_table" "tf_PublicSubnet2RouteTableID" {
+#  subnet_id = "${element(data.aws_subnet_ids.tf_PublicSubnet2.ids, 1)}"
+#}
+
+
+
+################################
+#Debug block:
+#output "existing_VPC_CIDR" {
+#  value = "${var.tf_VPCCIDR}"
+#}
+
+#output "VPC_ID" {
+#  value = "${data.aws_vpc.tf_existing_VPC.id}"
+#}
+
+#}
+#output "filter_name_for_PublicSubnet2" {
+#  value = "{$var.tf_StackLabel}-PublicSubnet2"
+#}
+#output "id_of_PublicSubnet2" {
+#  value = "${element(data.aws_subnet_ids.tf_PublicSubnet2.ids, 1)}"
+#}
+#output "id_of_PublicSubnet2RouteTableID" {
+#  value = "${data.aws_route_table.tf_PublicSubnet2RouteTableID}"
+#}
+########################
+
+ 
 #use: 
 #resource "aws_instance" "app" {
 #count         = "3"
@@ -31,10 +65,6 @@ data "aws_subnet_ids" "PublicSubnet2" {
 #instance_type = "t2.micro"
 #subnet_id     = "${element(data.aws_subnet_ids.private.ids, count.index)}"
 #}
-
-data "aws_route_table" "PublicSubnet2RouteTableID" {
-  subnet_id = "${element(data.aws_subnet_ids.PublicSubnet2.ids, 1)}"
-}
 
 #data "aws_route_table" "selected" {
 #  subnet_id = "${var.subnet_id}"
@@ -46,28 +76,15 @@ data "aws_route_table" "PublicSubnet2RouteTableID" {
 #  vpc_peering_connection_id = "pcx-45ff3dc1"
 #}
 
-################################
-#Debug block:
-output "existing_VPC_CIDR" {
-  value = "${var.tf_VPCCIDR}"
-}
+#variable "vpc_id" {}
+#
+#data "aws_vpc" "selected" {
+ # id = "${var.vpc_id}"
+#}
 
-output "VPC_ID" {
-  value = "${var.tf_VPCCIDR}"
-}
-output "existing_VPC" {
-  value = "${var.tf_VPCCIDR}"
-}
-output "filter_name_for_PublicSubnet2" {
-  value = "{$var.tf_StackLabel}-PublicSubnet2"
-}
-output "id_of_PublicSubnet2" {
-  value = "${element(data.aws_subnet_ids.PublicSubnet2.ids, 1)}"
-}
-output "id_of_PublicSubnet2RouteTableID" {
-  value = "${data.aws_route_table.PublicSubnet2RouteTableID}"
-}
-########################
-
- 
-
+#use:
+#resource "aws_subnet" "example" {
+#  vpc_id            = "${data.aws_vpc.selected.id}"
+#  availability_zone = "us-west-2a"
+#  cidr_block        = "${cidrsubnet(data.aws_vpc.selected.cidr_block, 4, 1)}"
+#}

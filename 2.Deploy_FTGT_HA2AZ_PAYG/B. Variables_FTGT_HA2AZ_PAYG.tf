@@ -3,9 +3,9 @@ variable "region" {
   default     = ""
 }
 
-variable "vpc_cidr" {
-  type = "string"
-}
+#variable "vpc_cidr" {
+#  type = "string"
+#}
 
 variable "tf_VPCCIDR" {
   type = "string"
@@ -59,12 +59,13 @@ variable "tf_CIDRForInstanceAccess" {
 			type = string
 			}
         
-variable "tf_AZForFGT1" {
-			type = string
-		}
-variable "tf_AZForFGT2" {
-			type = string
-        }
+#variable "tf_AZForFGT1" {
+#			type = string
+#		}
+#variable "tf_AZForFGT2" {
+#			type = string
+#        }
+
 variable "tf_KeyPair" {
             type        = string
             }
