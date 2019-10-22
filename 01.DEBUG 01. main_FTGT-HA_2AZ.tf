@@ -28,6 +28,28 @@ module "Deploy_VPC" {
   tf_PrivateSubnet2 = "${var.tf_PrivateSubnet2}"
   tf_HASyncSubnet2 = "${var.tf_HASyncSubnet2}"
   tf_HAMgmtSubnet2 = "${var.tf_HAMgmtSubnet2}"
- 
 }
 
+#output "result_foo" {
+#value = "${module.Deploy_VPC.foo}"
+#}
+
+#output "result_RT_id" {
+#value = "${module.Deploy_VPC.tf_PublicSubnet2RouteTableID}"
+#}
+
+output "result_VPC_id" {
+value = "${module.Deploy_VPC.existing_VPC_id}"
+}
+
+output "tf_PublicSubnet2ID" {
+value = "${module.Deploy_VPC.tf_PublicSubnet2ID}"
+}
+
+output "tf_RouteTableIDforPublicSubnet2" {
+value = "${module.Deploy_VPC.tf_PublicSubnet2RouteTableID}"
+}
+
+output "tf_debug_Sub2name" {
+value = "${module.Deploy_VPC.debug_Sub2name}"
+}

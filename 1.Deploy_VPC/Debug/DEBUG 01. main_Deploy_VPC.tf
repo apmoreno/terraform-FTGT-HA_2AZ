@@ -33,9 +33,9 @@ resource "aws_cloudformation_stack" "VPC_for_FTGT-HA2AZ" {
   template_url="https://apollinaire-ftgt-ha-2az-template.s3.amazonaws.com/BaseVPC_FGCP_DualAZ.template.json"
 } 
 
-#Now retrieve the Routing Table id for Public Subnet 2 (default name is "FTGT-HA-2AZs-PublicSubnet2") 
+# Now retrieve the Routing Table id for Public Subnet 2 (default name is "FTGT-HA-2AZs-PublicSubnet2") 
 # This is a parameter used in the CloudFormation stack.
-#1. Retrieve existing VPC id, 2.retrieve id of all subnet  PublicSubnet2, 3.retrieve the id of the route table for this subnet.
+# Steps: 1. Retrieve existing VPC id, 2.retrieve id of all subnet  PublicSubnet2, 3.retrieve the id of the route table for this subnet.
 
 data "aws_vpc" "tf_existing_VPC" {
   cidr_block = "${var.tf_VPCCIDR}"
