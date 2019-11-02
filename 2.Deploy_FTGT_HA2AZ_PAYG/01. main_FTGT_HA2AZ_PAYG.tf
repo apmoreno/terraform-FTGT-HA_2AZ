@@ -1,6 +1,7 @@
 #Need to have copied CloudFormation templates etc into S3 bucket in AWS which should be made public
 #Need to have an ongoing subscription to FortiGate on-demand (PAYG) in AWS Marketplace
 #Need to have deployed VPC with 4 Subnets using module "1.Deploy_VPC"
+# For BYOL, need to have licence files installed in S3 bucket
 
 
 
