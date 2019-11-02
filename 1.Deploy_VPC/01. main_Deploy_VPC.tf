@@ -1,6 +1,6 @@
 #Need to have copied CloudFormation templates etc into S3 bucket in AWS, which should be made public
-#Need to have an ongoing subscription to FortiGate on-demand (PAYG) in AWS Marketplace
-
+#Need to have an ongoing subscription to FortiGate on-demand (PAYG) or BYOL in AWS Marketplace
+# For BYOL, need to have licence files installed in S3 bucket
 
 
 resource "aws_cloudformation_stack" "VPC_for_FTGT-HA2AZ" {
@@ -37,24 +37,28 @@ resource "aws_cloudformation_stack" "VPC_for_FTGT-HA2AZ" {
   template_url="https://apollinaire-ftgt-ha-2az-template.s3.amazonaws.com/BaseVPC_FGCP_DualAZ.template.json"
 } 
 
-#Now retrieve the Routing Table id for Public Subnet 2 (default name is "FTGT-HA-2AZs-PublicSubnet2") 
-# This is a parameter used in the CloudFormation stack.
+#Now retrieve several parameters that will be needed in "01. main_FTGT_HA2AZ_PAYG.tf": 
+# - the id of the VPC created
+# - the Routing Table id for Public Subnet 2 
+# the id forech of the 8 subnets created 
+
+# Routing Table id for Public Subnet 2:
 #1. Retrieve existing VPC id, 2.retrieve id of all subnet  PublicSubnet2, 3.retrieve the id of the route table for this subnet.
 
 data "aws_vpc" "tf_existing_VPC" {
   cidr_block = "${var.tf_VPCCIDR}"
   depends_on = [aws_cloudformation_stack.VPC_for_FTGT-HA2AZ]
-
-  #cidr_block = "10.0.0.0/16"
 }
-
+output "existing_VPC_id" {
+  value = "${data.aws_vpc.tf_existing_VPC.id}"
+}
 
 data "aws_subnet_ids" "find_PublicSubnet2" {
     vpc_id = "${data.aws_vpc.tf_existing_VPC.id}"
   tags = {
  #   Name = "FTGT-HA-2AZs-PublicSubnet2"
     Name ="${local.nameTag}-PublicSubnet2"
-}
+        }
 }
 
 data "aws_route_table" "find_PublicSubnet2RouteTableID" {
@@ -74,11 +78,73 @@ output "debug_Sub2name" {
 value ="${local.nameTag}-PublicSubnet2"
 }
 
+
+data "aws_subnet" "sub_PublicSubnet1" {
+  depends_on = [aws_cloudformation_stack.VPC_for_FTGT-HA2AZ]
+  cidr_block = "${var.tf_PublicSubnet1}"
+} 
+output "mod_PublicSubnet1_id"{
+    value = "${data.aws_subnet.sub_PublicSubnet1.id}"
+}
+
+data "aws_subnet" "sub_PrivateSubnet1" {
+  depends_on = [aws_cloudformation_stack.VPC_for_FTGT-HA2AZ]
+  cidr_block = "${var.tf_PrivateSubnet1}"
+}
+output "mod_PrivateSubnet1_id"{
+    value = "${data.aws_subnet.sub_PrivateSubnet1.id}"
+}
+
+data "aws_subnet" "sub_HASyncSubnet1" {
+  depends_on = [aws_cloudformation_stack.VPC_for_FTGT-HA2AZ]
+  cidr_block = "${var.tf_HASyncSubnet1}"
+} 
+output "mod_HASyncSubnet1_id"{
+    value = "${data.aws_subnet.sub_HASyncSubnet1.id}"
+}
+
+data "aws_subnet" "sub_HAMgmtSubnet1" {
+  depends_on = [aws_cloudformation_stack.VPC_for_FTGT-HA2AZ]
+  cidr_block = "${var.tf_HAMgmtSubnet1}"
+} 
+output "mod_HAMgmtSubnet1_id"{
+    value = "${data.aws_subnet.sub_HAMgmtSubnet1.id}"
+}
+
+data "aws_subnet" "sub_PublicSubnet2" {
+  depends_on = [aws_cloudformation_stack.VPC_for_FTGT-HA2AZ]
+  cidr_block = "${var.tf_PublicSubnet2}"
+} 
+output "mod_PublicSubnet2_id"{
+    value = "${data.aws_subnet.sub_PublicSubnet2.id}"
+}
+
+data "aws_subnet" "sub_PrivateSubnet2" {
+  depends_on = [aws_cloudformation_stack.VPC_for_FTGT-HA2AZ]
+  cidr_block = "${var.tf_PrivateSubnet2}"
+}
+output "mod_PrivateSubnet2_id"{
+    value = "${data.aws_subnet.sub_PrivateSubnet2.id}"
+}
+
+data "aws_subnet" "sub_HASyncSubnet2" {
+  depends_on = [aws_cloudformation_stack.VPC_for_FTGT-HA2AZ]
+  cidr_block = "${var.tf_HASyncSubnet2}"
+} 
+output "mod_HASyncSubnet2_id"{
+    value = "${data.aws_subnet.sub_HASyncSubnet2.id}"
+}
+
+data "aws_subnet" "sub_HAMgmtSubnet2" {
+  depends_on = [aws_cloudformation_stack.VPC_for_FTGT-HA2AZ]
+  cidr_block = "${var.tf_HAMgmtSubnet2}"
+} 
+output "mod_HAMgmtSubnet2_id"{
+    value = "${data.aws_subnet.sub_HAMgmtSubnet2.id}"
+}
 ################################################
 ### Next lines no longer needed - used to debug
-#output "existing_VPC_id" {
-#  value = "${data.aws_vpc.tf_existing_VPC.id}"
-#}
+
 #output "debug_Sub2name" {
 #value ="${var.tf_StackLabel}-PublicSubnet2"
 

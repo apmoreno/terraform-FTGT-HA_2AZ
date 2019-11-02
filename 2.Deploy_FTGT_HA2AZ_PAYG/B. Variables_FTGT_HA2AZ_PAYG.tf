@@ -19,35 +19,35 @@ variable "tf_AZForSubnet2" {
   type = "string"
 }
 
-variable "tf_PublicSubnet1" {
+variable "tf_PublicSubnet1_id" {
   type = "string"
 }
 
-variable "tf_PrivateSubnet1" {
+variable "tf_PrivateSubnet1_id" {
   type = "string"
 }
 
-variable "tf_HASyncSubnet1" {
+variable "tf_HASyncSubnet1_id" {
   type = "string"
 }
 
-variable "tf_HAMgmtSubnet1" {
+variable "tf_HAMgmtSubnet1_id" {
   type = "string"
 }
 
-variable "tf_PublicSubnet2" {
+variable "tf_PublicSubnet2_id" {
   type = "string"
 }
 
-variable "tf_PrivateSubnet2" {
+variable "tf_PrivateSubnet2_id" {
   type = "string"
 }
 
-variable "tf_HASyncSubnet2" {
+variable "tf_HASyncSubnet2_id" {
   type = "string"
 }
 
-variable "tf_HAMgmtSubnet2" {
+variable "tf_HAMgmtSubnet2_id" {
   type = "string"
 }
 
