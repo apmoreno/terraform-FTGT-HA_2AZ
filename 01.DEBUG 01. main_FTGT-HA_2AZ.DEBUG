@@ -38,11 +38,11 @@ module "Deploy_VPC" {
 #value = "${module.Deploy_VPC.tf_PublicSubnet2RouteTableID}"
 #}
 
-output "result_VPC_id" {
-value = "${module.Deploy_VPC.existing_VPC_id}"
-}
+#output "result_VPC_id" {
+#value = "${module.Deploy_VPC.existing_VPC_id}"
+#}
 
-output "tf_PublicSubnet2ID" {
+output "tf_PublicSubnet2ID_list" {
 value = "${module.Deploy_VPC.tf_PublicSubnet2ID}"
 }
 
@@ -50,6 +50,11 @@ output "tf_RouteTableIDforPublicSubnet2" {
 value = "${module.Deploy_VPC.tf_PublicSubnet2RouteTableID}"
 }
 
-output "tf_debug_Sub2name" {
-value = "${module.Deploy_VPC.debug_Sub2name}"
+#output "tf_debug_Sub2name" {
+#value = "${module.Deploy_VPC.debug_Sub2name}"
+#qa}
+
+output "tf_PublicSubnet2ID" {
+value = "${module.Deploy_VPC.tf_PublicSubnet2ID}"
+
 }
