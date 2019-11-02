@@ -18,3 +18,5 @@ terraform.tfstate.backup
 *.backup
 terraform.tfstate
 terraform.tfstate.backup
+~$Variables.xlsx
+.terraform.tfstate.lock.info
