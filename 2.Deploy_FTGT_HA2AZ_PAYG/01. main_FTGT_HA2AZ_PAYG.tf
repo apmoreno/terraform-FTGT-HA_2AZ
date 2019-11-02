@@ -4,15 +4,24 @@
 
 
 
+data "aws_subnet" "sub_PublicSubnet1" {
+  depends_on = [aws_cloudformation_stack.VPC_for_FTGT-HA2AZ]
+  cidr_block = "${var.tf_PublicSubnet1}"
+} 
 
-resource "aws_cloudformation_stack" "FTGT-HA2AZ_PAYG" {
-  name = "VPC-FTGT-HA-2-AZs_PAYG"
+data "aws_subnet" "sub_PublicSubnet2" {
+  depends_on = [aws_cloudformation_stack.VPC_for_FTGT-HA2AZ]
+  cidr_block = "${var.tf_PublicSubnet2}"
+} 
+
+resource "aws_cloudformation_stack" "FTGT-HA2AZ-PAYG" {
+  name = "VPC-FTGT-HA-2-AZs-PAYG"
 
   parameters = {
-    "VPCID" = "${data.aws_vpc.existing_VPC.id}"
+    "VPCID" = "${var.tf_existing_VPC_id}"
     "VPCCIDR" = "${var.tf_VPCCIDR}"
-    "PublicSubnet1" = "${var.tf_PublicSubnet1}"
-    "PrivateSubnet1"= "${var.tf_PrivateSubnet1}"
+    "PublicSubnet1" = "${data.aws_subnet.sub_PublicSubnet1.id}"
+    "PrivateSubnet1"= "${data.aws_subnet.sub_PublicSubnet2.id}"
     "HASyncSubnet1" = "${var.tf_HASyncSubnet1}"
     "HAMgmtSubnet1" = "${var.tf_HAMgmtSubnet1}"
     "PublicSubnet2" = "${var.tf_PublicSubnet2}"
@@ -27,7 +36,7 @@ resource "aws_cloudformation_stack" "FTGT-HA2AZ_PAYG" {
 	"S3EndpointDeployment" = "${var.tf_S3EndpointDeployment}"
 	"PublicSubnet2RouteTableID" = "${var.tf_PublicSubnet2RouteTableID}"
 	"InitS3Bucket" = "${var.tf_InitS3Bucket}"
-	"InitS3BucketRegion" = "${var.region}"
+	"InitS3BucketRegion" = "${var.tf_InitS3BucketRegion}"
 	"LicenseType" = "${var.tf_LicenseType}"
 	"FortiGate1LicenseFile" = "${var.tf_FortiGate1LicenseFile}"
 	"FortiGate2LicenseFile" = "${var.tf_FortiGate2LicenseFile}"

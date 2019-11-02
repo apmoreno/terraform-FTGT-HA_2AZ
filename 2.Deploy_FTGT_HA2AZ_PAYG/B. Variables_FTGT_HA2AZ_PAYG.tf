@@ -3,9 +3,9 @@ variable "region" {
   default     = ""
 }
 
-#variable "vpc_cidr" {
-#  type = "string"
-#}
+variable "tf_existing_VPC_id" {
+  type = "string"
+}
 
 variable "tf_VPCCIDR" {
   type = "string"
@@ -51,19 +51,20 @@ variable "tf_HAMgmtSubnet2" {
   type = "string"
 }
 
+
 variable "tf_InstanceType" {
   type = "string"
 }
 		
 variable "tf_CIDRForInstanceAccess" {
-			type = string
+  type = string
 			}
         
 #variable "tf_AZForFGT1" {
-#			type = string
+#  type = string
 #		}
 #variable "tf_AZForFGT2" {
-#			type = string
+#  type = string
 #        }
 
 variable "tf_KeyPair" {
@@ -71,72 +72,72 @@ variable "tf_KeyPair" {
             }
             
 variable "tf_S3EndpointDeployment" {
-			type = string
+  type = string
             default = ""
 		}
         
-#variable "tf_PublicSubnet2RouteTableID" {
-#			type = string
-#		}
+variable "tf_PublicSubnet2RouteTableID" {
+  type = string
+		}
 
 variable "tf_InitS3Bucket" {
-			type = string
+  type = string
 		}
         
 variable "tf_InitS3BucketRegion" {
-			type = string			
+  type = string			
 		}
 variable "tf_LicenseType" {
-			type = string
+  type = string
 		}
         
 variable "tf_FortiGate1LicenseFile" {
-			type = string
+  type = string
 		}
 variable "tf_FortiGate2LicenseFile" {
-			type = string
+  type = string
 		}
                      
 variable "tf_PublicSubnet1RouterIP" {
-			type = string
+  type = string
 		}
 variable "tf_PrivateSubnet1RouterIP" {
-			type = string
+  type = string
 		}
 variable "tf_HAMgmtSubnet1RouterIP" {
-			type = string
+  type = string
 		}
 variable "tf_PublicSubnet2RouterIP" {
-			type = string
+  type = string
 		}
 variable "tf_PrivateSubnet2RouterIP" {
-			type = string
+  type = string
 		}
 variable "tf_HAMgmtSubnet2RouterIP" {
-			type = string
+  type = string
 		}
 variable "tf_FortiGate1PublicIP" {
-			type = string
+  type = string
 		}
 variable "tf_FortiGate1PrivateIP" {
-			type = string
+  type = string
 		}
 variable "tf_FortiGate1HAsyncIP" {
-			type = string
+  type = string
 		}
 variable "tf_FortiGate1HAmgmtIP" {
-			type = string
+  type = string
 		}
 variable "tf_FortiGate2PublicIP" {
-			type = string
+  type = string
 		}
 variable "tf_FortiGate2PrivateIP" {
-			type = string
+  type = string
 		}
 variable "tf_FortiGate2HAsyncIP" {
-			type = string
+  type = string
 		}
 variable "tf_FortiGate2HAmgmtIP" {
-			type = string
+  type = string
 		}
         

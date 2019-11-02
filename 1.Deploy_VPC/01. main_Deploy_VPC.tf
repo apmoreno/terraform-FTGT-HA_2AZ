@@ -1,8 +1,12 @@
 #Need to have copied CloudFormation templates etc into S3 bucket in AWS, which should be made public
 #Need to have an ongoing subscription to FortiGate on-demand (PAYG) in AWS Marketplace
 
+
+
 resource "aws_cloudformation_stack" "VPC_for_FTGT-HA2AZ" {
-  name = "${var.tf_StackLabel}"
+  #name = "${var.nameTag}"
+   name = local.nameTag
+
 
   parameters = {
     "VPCCIDR" = "${var.tf_VPCCIDR}"
@@ -49,7 +53,7 @@ data "aws_subnet_ids" "tf_PublicSubnet2" {
     vpc_id = "${data.aws_vpc.tf_existing_VPC.id}"
   tags = {
  #   Name = "FTGT-HA-2AZs-PublicSubnet2"
-    Name ="${var.tf_StackLabel}-PublicSubnet2"
+    Name ="${local.nameTag}-PublicSubnet2"
 }
 }
 
@@ -67,7 +71,7 @@ output "existing_VPC_id" {
   value = "${data.aws_vpc.tf_existing_VPC.id}"
 }
 output "debug_Sub2name" {
-value ="${var.tf_StackLabel}-PublicSubnet2"
+value ="${local.nameTag}-PublicSubnet2"
 
 }
 output "tf_PublicSubnet2ID" {
@@ -76,31 +80,31 @@ output "tf_PublicSubnet2ID" {
 
 
 
-resource "aws_vpc" "Main_VPC" {
-    cidr_block           = "10.1.0.0/16"
-    enable_dns_hostnames = true
-    enable_dns_support   = true
-    instance_tenancy     = "default"
+#resource "aws_vpc" "Main_VPC" {
+#    cidr_block           = "10.1.0.0/16"
+#    enable_dns_hostnames = true
+#    enable_dns_support   = true
+#    instance_tenancy     = "default"###
+#
+#    tags = {
+#        "Name" : "Other_VPC"
+#    }
+#}
 
-    tags = {
-        "Name" : "Other_VPC"
-    }
-}
 
-
-data "aws_vpc" "foo" {
-depends_on = [aws_vpc.Main_VPC]
-cidr_block           = "10.1.0.0/16"
+#data "aws_vpc" "foo" {
+#depends_on = [aws_vpc.Main_VPC]
+#cidr_block           = "10.1.0.0/16"
   #tags = {
  #   service = "production"
  # }
-}
+#}
 
-output "foo" {
-  value = "${data.aws_vpc.foo.id}"
-}
+#output "foo" {
+#  value = "${data.aws_vpc.foo.id}"
+#}
 
 
-output "debug_PublicSubnet2RouteTableID" {
-    value = "${aws_vpc.Main_VPC.main_route_table_id}"
-}
+#output "debug_PublicSubnet2RouteTableID" {
+#    value = "${aws_vpc.Main_VPC.main_route_table_id}"
+#}

@@ -1,4 +1,10 @@
 # Variables for "01. terraform-FTGT-HA2AZ.tf"
+# Parameters in this file will determine the AWS region used as well:
+# - whether PAYG or BYOL is used-
+# - where the BYOL licence files are stored
+# - whether a new S3 end pointwill be created (default is YES)
+# - the S3 bucket where config files will be created
+
 
 terraform {
   required_version = ">= 0.12"
@@ -38,46 +44,55 @@ variable "tf_AZForSubnet1" {
 		}
 
 variable "tf_AZForSubnet2" {
+            type = "string"
             default = "us-east-1b"
             description = "Select an Availability Zone for the second set of subnets"
 		}
 
 variable "tf_PublicSubnet1" {
+            type = "string"
             default = "10.0.1.0/24"
 			description = "Provide a network CIDR for PublicSubnet1"
 		}
 
 variable "tf_PrivateSubnet1" {
+            type = "string"
 			default = "10.0.2.0/24"
 			description = "Provide a network CIDR for PrivateSubnet1"
 		}
 
 variable "tf_HASyncSubnet1" {
+            type = "string"
 			default = "10.0.3.0/24"
 			description = "Provide a network CIDR for HASyncSubnet1"
 		}
 
 variable "tf_HAMgmtSubnet1" {
+            type = "string"
 			default = "10.0.4.0/24"
 			description = "Provide a network CIDR for HAMgmtSubnet1"
 		}
 
 variable "tf_PublicSubnet2" {
+            type = "string"
 			default = "10.0.10.0/24"
 			description = "Provide a network CIDR for PublicSubnet2"
 		}
 
 variable "tf_PrivateSubnet2" {
+            type = "string"
 			default = "10.0.20.0/24"
 			description = "Provide a network CIDR for PrivateSubnet2"
 		}
 
 variable "tf_HASyncSubnet2" {
+            type = "string"
             default = "10.0.30.0/24"
 			description = "Provide a network CIDR for HASyncSubnet2"
 		}
 
 variable "tf_HAMgmtSubnet2" {
+            type = "string"
 			default = "10.0.40.0/24"
 			description = "Provide a network CIDR for HAMgmtSubnet2"
         }
@@ -132,7 +147,7 @@ variable "tf_PublicSubnet2RouteTableID" {
 
 variable "tf_InitS3Bucket" {
 			type = string
-            default = ""
+            default = "apollinaire-ftgt-bucket"
 			description =  "Provide the Init S3 Bucket name where your config files will be created"
 		}
         

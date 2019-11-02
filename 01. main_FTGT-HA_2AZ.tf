@@ -35,7 +35,7 @@ module "Deploy_FTGT_HA2AZ_PAYG" {
     
     source = "./2.Deploy_FTGT_HA2AZ_PAYG"
     region = "${var.region}"
-   #"vpc_cidr"
+    tf_existing_VPC_id = "${module.Deploy_VPC.existing_VPC_id}"   
     tf_VPCCIDR = "${var.tf_VPCCIDR}"
     tf_PublicSubnet1 = "${var.tf_PublicSubnet1}"
     tf_PrivateSubnet1= "${var.tf_PrivateSubnet1}"
