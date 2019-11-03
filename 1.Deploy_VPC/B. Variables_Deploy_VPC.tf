@@ -10,12 +10,6 @@ variable "tf_StackLabel" {
 locals {
 nameTag = "${var.tf_StackLabel}${formatdate("-YYYY-MM-DD-hh-mm", timestamp())}"
 } 
-
-#variable "nameTag" {
-#  type = "string"
-#  description = "used to store NameTAg used as stub for naming resources"
-#
-#}
         
 variable "tf_VPCCIDR" {
   type = "string"

@@ -6,7 +6,7 @@
 
 
 resource "aws_cloudformation_stack" "FTGT-HA2AZ-PAYG" {
-  name = "VPC-FTGT-HA-2-AZs-PAYG"
+  name = "FTGT-HA-2-AZs-PAYG"
 
   parameters = {
     "VPCID" = "${var.tf_existing_VPC_id}"

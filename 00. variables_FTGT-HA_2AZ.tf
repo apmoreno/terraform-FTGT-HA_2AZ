@@ -106,17 +106,6 @@ variable "tf_CIDRForInstanceAccess" {
 			default = "0.0.0.0/0"
 			description = "Provide a network CIDR from which the FortiGate instances will be accessed"
 		}
-        
-#variable "tf_AZForFGT1" {
-#			type = string
-#            default = ""
-#			description =  "Select an Availability Zone for FortiGate1"
-#		}
-#variable "tf_AZForFGT2" {
-#			type = string
-#            default = ""
-#			description =  "Select an Availability Zone for FortiGate2"
-#}
 
 variable "tf_KeyPair" {
             type        = string
@@ -159,7 +148,7 @@ variable "tf_InitS3BucketRegion" {
 		}
 variable "tf_LicenseType" {
 			type = string
-            default = "PAYG"
+            default = "BYOL"
 			description =  "Select the license type for the FortiGates"
 #			"AllowedValues"
 #				"PAYG"
@@ -168,12 +157,12 @@ variable "tf_LicenseType" {
         
 variable "tf_FortiGate1LicenseFile" {
 			type = string
-            default =  ""
+            default =  "FGVM4VTM19001627.lic"
 			description =  "[BYOL Only leave blank for PAYG] Provide the name of the BYOL license file in the Init S3 Bucket for FortiGate1 (ie fgt1.lic or prefix/fgt1.lic)"
 		}
 variable "tf_FortiGate2LicenseFile" {
 			type = string
-            default =  ""
+            default =  "FGVM4VTM19001628.lic"
 			description =  "[BYOL Only leave blank for PAYG] Provide the name of the BYOL license file in the Init S3 Bucket for FortiGate2 (ie fgt2.lic or prefix/fgt2.lic)"
 		}
          
@@ -250,3 +239,16 @@ variable "tf_FortiGate2HAmgmtIP" {
 			description =  "Provide the IP address in CIDR form for the ha management interface of FortiGate2 (IP from HAMgmtSubnet1)"
 		}
         
+variable "ec2_key_name" {
+ type        = string
+ default = "AWS-FTGT"
+}
+
+variable "test_amis" {
+  type = "map"
+  default = {
+    "us-east-1" = "ami-b374d5a5"
+    "us-west-2" = "ami-4b32be2b"
+    "us-east-2" = "ami-02bcbb802e03574ba"
+  }
+}
