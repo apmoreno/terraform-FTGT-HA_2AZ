@@ -20,3 +20,5 @@ terraform.tfstate
 terraform.tfstate.backup
 ~$Variables.xlsx
 .terraform.tfstate.lock.info
+Licences/FGVM4VTM19001627.lic
+Licences/FGVM4VTM19001628.lic

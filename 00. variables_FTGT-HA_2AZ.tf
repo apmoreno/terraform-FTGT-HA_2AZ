@@ -20,19 +20,17 @@ variable "region" {
   default     = "us-east-1"
 }
 
-#variable "availability-zones" {
-#  type = list(string)
-#  default = [
-#     "us-east-1a",
-#    "us-east-1b"
-#  ]
-#}
-
 variable "tf_StackLabel" {
 			default = "FTGT-HA-2AZs"
 			description = "Name of the CloudFormation stack"
 		}
   
+variable "nameTag"{
+            type = string
+            default = ""
+} 
+
+
 variable "tf_VPCCIDR" {
 			default = "10.0.0.0/16"
 			description = "Provide a network CIDR for the VPC"

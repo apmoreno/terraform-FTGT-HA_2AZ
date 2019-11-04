@@ -4,9 +4,8 @@
 
 
 resource "aws_cloudformation_stack" "VPC_for_FTGT-HA2AZ" {
-  #name = "${var.nameTag}"
-   name = local.nameTag
-
+  # name = local.nameTag
+   name = "${var.nameTag}"
 
   parameters = {
     "VPCCIDR" = "${var.tf_VPCCIDR}"
@@ -57,7 +56,7 @@ data "aws_subnet_ids" "find_PublicSubnet2" {
     vpc_id = "${data.aws_vpc.tf_existing_VPC.id}"
   tags = {
  #   Name = "FTGT-HA-2AZs-PublicSubnet2"
-    Name ="${local.nameTag}-PublicSubnet2"
+    Name ="${var.nameTag}-PublicSubnet2"
         }
 }
 
@@ -70,12 +69,16 @@ output "tf_PublicSubnet2RouteTableID" {
     value = "${data.aws_route_table.find_PublicSubnet2RouteTableID.route_table_id}"
 }
 
+output "nameTag_VPC"{
+    value = "${lookup(data.aws_vpc.tf_existing_VPC.tags, "Name","")}"
+}
+
 output "tf_PublicSubnet2ID" {
     value = "${sort(data.aws_subnet_ids.find_PublicSubnet2.ids) [0]}"
 
 }
 output "debug_Sub2name" {
-value ="${local.nameTag}-PublicSubnet2"
+    value ="${var.nameTag}-PublicSubnet2"
 }
 
 

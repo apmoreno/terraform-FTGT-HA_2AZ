@@ -5,8 +5,9 @@
 # For BYOL, need to have licence files installed in S3 bucket
 
 
-resource "aws_cloudformation_stack" "FTGT-HA2AZ-PAYG" {
-  name = "FTGT-HA-2-AZs-PAYG"
+resource "aws_cloudformation_stack" "DEPLOY_FTGT-HA2AZ" {
+# name = "Deploy-FTGT-HA2AZ"
+    name = "${var.nameTag}"
 
   parameters = {
     "VPCID" = "${var.tf_existing_VPC_id}"
@@ -55,9 +56,37 @@ resource "aws_cloudformation_stack" "FTGT-HA2AZ-PAYG" {
   ]
   
   tags = {
-        "Name" : "FTGT-HA2AZ_PAYG"
+        "Name" : "FTGT-HA2AZ_DEPLOY"
     }
   
   template_url="https://apollinaire-ftgt-ha-2az-template.s3.amazonaws.com/FGCP_DualAZ_ExistingVPC.template.json"
 } 
 
+
+data "aws_vpc" "Existing_VPC" {
+  id = "${var.tf_existing_VPC_id}"
+  depends_on = [aws_cloudformation_stack.DEPLOY_FTGT-HA2AZ]
+}
+
+#data "aws_network_interface" "eni1Port2Ftgt1" {
+#  depends_on = [aws_cloudformation_stack.DEPLOY_FTGT-HA2AZ]
+#  filter {
+#        name = "private-ip-address"
+#        name = "addresses.private-ip-address"
+#        values = ["${var.tf_FortiGate1PrivateIP}"]
+#}
+#}
+
+#resource "aws_default_route_table" "Main_VPC_RT" {
+ # default_route_table_id = "${data.aws_vpc.Existing_VPC.main_route_table_id}"
+ # depends_on = [aws_cloudformation_stack.DEPLOY_FTGT-HA2AZ]
+  #
+#    route {
+#        cidr_block = "0.0.0.0/0"
+#        gateway_id = "${data.aws_network_interface.eni1Port2Ftgt1.id}"
+ #   }
+
+  #  tags = {
+   #     "Name" : "Main_VPC_RT"
+    #}
+#}

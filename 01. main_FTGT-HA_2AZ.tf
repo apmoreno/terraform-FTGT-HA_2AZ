@@ -16,6 +16,7 @@ module "Deploy_VPC" {
   source = "./1.Deploy_VPC"
   
   region = "${var.region}"
+  nameTag = "VPC-${var.tf_StackLabel}${formatdate("-YYYY-MM-DD-hh-mm", timestamp())}"
   tf_StackLabel = "${var.tf_StackLabel}"
   tf_VPCCIDR = "${var.tf_VPCCIDR}"
   tf_AZForSubnet1 = "${var.tf_AZForSubnet1}"
@@ -31,10 +32,11 @@ module "Deploy_VPC" {
  
 }
 
-module "Deploy_FTGT_HA2AZ_PAYG" {
+module "Deploy_FTGT_HA2AZ" {
     
-    source = "./2.Deploy_FTGT_HA2AZ_PAYG"
+    source = "./2.Deploy_FTGT_HA2AZ"
     region = "${var.region}"
+    nameTag = "Deploy-${var.tf_StackLabel}${formatdate("-YYYY-MM-DD-hh-mm", timestamp())}"
     tf_existing_VPC_id = "${module.Deploy_VPC.existing_VPC_id}"   
     tf_VPCCIDR = "${var.tf_VPCCIDR}"
     tf_AZForSubnet1 = "${var.tf_AZForSubnet1}"
@@ -72,4 +74,12 @@ module "Deploy_FTGT_HA2AZ_PAYG" {
 	tf_FortiGate2PrivateIP = "${var.tf_FortiGate2PrivateIP}"
 	tf_FortiGate2HAsyncIP = "${var.tf_FortiGate2HAsyncIP}"
 	tf_FortiGate2HAmgmtIP = "${var.tf_FortiGate2HAmgmtIP}"
+    }
+    
+    output "value_tf_FortiGate1PrivateIP" {
+    value = "${module.Deploy_FTGT_HA2AZ.debug1}" 
+    }
+    
+    output "value_tf_FortiGate1PrivateIP_Substring" {
+    value = "${module.Deploy_FTGT_HA2AZ.debug2}" 
     }

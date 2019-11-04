@@ -1,0 +1,69 @@
+# ----------------------------------------------------------------------------------------------------------------------
+# REQUIRE A SPECIFIC TERRAFORM VERSION OR HIGHER
+# This module has been updated with 0.12 syntax, which means it is no longer compatible with any versions below 0.12.
+# ----------------------------------------------------------------------------------------------------------------------
+terraform {
+  required_version = ">= 0.12"
+}
+
+# ---------------------------------------------------------------------------------------------------------------------
+# DEPLOY AWS environment - one VPCs with two public and two private subnet each in the  same AZ. See Fortinet GitHub for details:
+# https://github.com/fortinet/aws-cloudformation-templates/tree/master/HA/6.2/DualAZ
+# ---------------------------------------------------------------------------------------------------------------------
+
+module "Deploy_VPC" {
+    
+  source = "./1.Deploy_VPC"
+  
+  region = "${var.region}"
+  nameTag = "${var.tf_StackLabel}${formatdate("-YYYY-MM-DD-hh-mm", timestamp())}"
+  tf_StackLabel = "${var.tf_StackLabel}"
+  tf_VPCCIDR = "${var.tf_VPCCIDR}"
+  tf_AZForSubnet1 = "${var.tf_AZForSubnet1}"
+  tf_AZForSubnet2 = "${var.tf_AZForSubnet2}"
+  tf_PublicSubnet1 = "${var.tf_PublicSubnet1}"
+  tf_PrivateSubnet1 = "${var.tf_PrivateSubnet1}"
+  tf_HASyncSubnet1 = "${var.tf_HASyncSubnet1}"
+  tf_HAMgmtSubnet1 = "${var.tf_HAMgmtSubnet1}"
+  tf_PublicSubnet2 = "${var.tf_PublicSubnet2}"
+  tf_PrivateSubnet2 = "${var.tf_PrivateSubnet2}"
+  tf_HASyncSubnet2 = "${var.tf_HASyncSubnet2}"
+  tf_HAMgmtSubnet2 = "${var.tf_HAMgmtSubnet2}"
+ 
+}
+
+
+data "aws_vpc" "Existing_VPC" {
+  id = "${module.Deploy_VPC.existing_VPC_id}"
+  depends_on = [module.Deploy_VPC]
+}
+
+data "aws_internet_gateway" "default" {
+    filter {
+        name   = "attachment.vpc-id"
+        values = ["${module.Deploy_VPC.existing_VPC_id}"]
+  }
+}
+
+data "aws_network_interface" "eni1Port2Ftgt1" {
+   filter {
+        name = "addresses.primary"
+        value = "${var.tf_FortiGate1PrivateIP}"
+}
+
+resource "aws_default_route_table" "Main_VPC_RT" {
+  default_route_table_id = "${data.aws_vpc.Existing_VPC.main_route_table_id}"
+    depends_on = [module.Deploy_VPC]
+  
+    route {
+        cidr_block = "0.0.0.0/0"
+        gateway_id = "${data.aws_internet_gateway.default.internet_gateway_id}"
+    }
+
+    tags = {
+        "Name" : "Main_VPC_RT"
+    }
+}
+
+
+# debug: eni-0f57acea15bc10061

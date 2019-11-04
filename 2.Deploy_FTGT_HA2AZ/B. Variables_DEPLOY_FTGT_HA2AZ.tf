@@ -3,6 +3,10 @@ variable "region" {
   default     = ""
 }
 
+variable "nameTag" {
+  type = "string"
+}  
+
 variable "tf_existing_VPC_id" {
   type = "string"
 }
