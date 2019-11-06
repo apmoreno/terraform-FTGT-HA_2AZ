@@ -83,3 +83,23 @@ module "Deploy_FTGT_HA2AZ" {
     output "value_tf_FortiGate1PrivateIP_Substring" {
     value = "${module.Deploy_FTGT_HA2AZ.debug2}" 
     }
+    
+    output "value_tf_InitS3Bucket" {
+    value = "${module.Deploy_FTGT_HA2AZ.debug3}"
+    }
+    
+    output "value_tf_InitS3BucketRegion" {
+    value = "${module.Deploy_FTGT_HA2AZ.debug4}"
+    }
+    
+    output "value_tf_LicenseType" {
+    value = "${module.Deploy_FTGT_HA2AZ.debug5}"
+    }
+    
+    output "value_tf_FortiGate1LicenseFile" {
+    value = "${module.Deploy_FTGT_HA2AZ.debug6}"
+    }
+    
+    output "value_tf_FortiGate2LicenseFile" {
+    value = "${module.Deploy_FTGT_HA2AZ.debug7}"
+    }

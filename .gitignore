@@ -22,3 +22,5 @@ terraform.tfstate.backup
 .terraform.tfstate.lock.info
 Licences/FGVM4VTM19001627.lic
 Licences/FGVM4VTM19001628.lic
+Old_terraform.rtf
+terraform.txt

@@ -28,3 +28,19 @@ resource "aws_default_route_table" "Main_VPC_RT" {
         "Name" : "Main_VPC_RT"
     }
 }
+
+output "debug3" {
+    value = "${var.tf_InitS3Bucket}"
+}
+output "debug4" {
+    value = "${var.tf_InitS3BucketRegion}"
+}
+output "debug5" {
+    value = "${var.tf_LicenseType}"
+}
+output "debug6" {
+    value = "${var.tf_FortiGate1LicenseFile}"
+}
+output "debug7" {
+    value = "${var.tf_FortiGate2LicenseFile}"
+}
