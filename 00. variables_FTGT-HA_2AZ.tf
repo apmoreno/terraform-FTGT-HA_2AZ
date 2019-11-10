@@ -155,12 +155,12 @@ variable "tf_LicenseType" {
         
 variable "tf_FortiGate1LicenseFile" {
 			type = string
-            default =  "FGVM4VTM19001627.lic"
+            default =  "FGVM4VTM19001629.lic"
 			description =  "[BYOL Only leave blank for PAYG] Provide the name of the BYOL license file in the Init S3 Bucket for FortiGate1 (ie fgt1.lic or prefix/fgt1.lic)"
 		}
 variable "tf_FortiGate2LicenseFile" {
 			type = string
-            default =  "FGVM4VTM19001628.lic"
+            default =  "FGVM4VTM19001630.lic"
 			description =  "[BYOL Only leave blank for PAYG] Provide the name of the BYOL license file in the Init S3 Bucket for FortiGate2 (ie fgt2.lic or prefix/fgt2.lic)"
 		}
          
