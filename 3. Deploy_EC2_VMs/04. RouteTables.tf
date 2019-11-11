@@ -1,4 +1,7 @@
-resource "aws_default_route_table" "Main_VPC_RT" {
+Not sure I need this.
+If the default route table alreadys ends out-ot-subnet data to port 2 of the FTGT, then no need .
+
+resource "aws_default_route_table" "ProtectedSubnet1" {
   default_route_table_id = "${aws_vpc.Main_VPC.default_route_table_id}"
     
     route {

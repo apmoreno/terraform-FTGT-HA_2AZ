@@ -250,3 +250,26 @@ variable "test_amis" {
     "us-east-2" = "ami-02bcbb802e03574ba"
   }
 }
+
+variable "tf_AZForSubnetVM1" {
+            default = "us-east-1a"
+			description = "Select an Availability Zone for the first set of subnets"
+		}
+
+variable "tf_AZForSubnetVM2" {
+            type = "string"
+            default = "us-east-1b"
+            description = "Select an Availability Zone for the second set of subnets"
+		}
+
+variable "tf_ProtectedSubnet1" {
+            type = "string"
+            default = "10.0.100.0/24"
+			description = "Provide a network CIDR for ProtectedSubnet1"
+		}
+
+variable "tf_ProtectedSubnet2" {
+            type = "string"
+			default = "10.0.200.0/24"
+			description = "Provide a network CIDR for ProtectedSubnet2"
+		}

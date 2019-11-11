@@ -1,10 +1,10 @@
-resource "aws_instance" "Linux_PublicSub" {
+resource "aws_instance" "Windows_VM_1" {
     ami                         = var.test_amis[var.region]
-    availability_zone           = var.avail-zone-c[var.region]
+    availability_zone           = "${var.tf_AZForSubnetVM1}"
     ebs_optimized               = false
     instance_type               = "t2.micro"
     monitoring                  = false
-    key_name                    = var.ec2_key_name
+    key_name                    = "${var.AWS-FTGT}
     subnet_id                   = aws_subnet.PublicSubnet.id
     vpc_security_group_ids      = [aws_security_group.SG_Public.id]
     associate_public_ip_address = true
@@ -23,7 +23,7 @@ resource "aws_instance" "Linux_PublicSub" {
 }
 
 
-resource "aws_instance" "Linux_PrivateSub" {
+resource "aws_instance" "Windows_VM_2" {
     ami                         = var.test_amis[var.region]
     availability_zone           = var.avail-zone-c[var.region]
     ebs_optimized               = false

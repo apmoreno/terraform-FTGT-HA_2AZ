@@ -1,22 +1,22 @@
-resource "aws_subnet" "VM_Subnet1" {
-    vpc_id                  = aws_vpc.Main_VPC.id
-    cidr_block              = "172.16.0.0/24"
-    availability_zone       = var.avail-zone-c[var.region]
+resource "aws_subnet" "ProtectedSubnet1" {
+    vpc_id                  = "${var.tf_existing_VPC_id}"
+    cidr_block              = "${var.tf_ProtectedSubnet1}"
+    availability_zone       = "${var.tf_AZForSubnetVM1}"
     map_public_ip_on_launch = false
 
     tags = {
-        "Name" : "PublicSubnet"
+        "Name" : "ProtectedSubnet1"
     }
 }
 
-resource "aws_subnet" "VM_Subnet2" {
-    vpc_id                  = aws_vpc.Main_VPC.id
-    cidr_block              = "172.16.1.0/24"
-    availability_zone           = var.avail-zone-c[var.region]
+resource "aws_subnet" "ProtectedSubnet2" {
+    vpc_id                  = "${var.tf_existing_VPC_id}"
+    cidr_block              = "${var.tf_ProtectedSubnet2}"
+    availability_zone       = "${var.tf_AZForSubnetVM2}"
     map_public_ip_on_launch = false
 
     tags = {
-        "Name" : "PrivateSubnet"
-    }
+        "Name" : "ProtectedSubnet2"
+    
 }
 
