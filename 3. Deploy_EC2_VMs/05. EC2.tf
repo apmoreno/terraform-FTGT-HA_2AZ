@@ -1,16 +1,16 @@
 resource "aws_instance" "Windows_VM_1" {
-    ami                         = var.test_amis[var.region]
+    ami                         = "${var.test_amis[var.region]}
     availability_zone           = "${var.tf_AZForSubnetVM1}"
     ebs_optimized               = false
     instance_type               = "t2.micro"
     monitoring                  = false
-    key_name                    = "${var.AWS-FTGT}
-    subnet_id                   = aws_subnet.PublicSubnet.id
-    vpc_security_group_ids      = [aws_security_group.SG_Public.id]
+    key_name                    = "${var.tf_ec2_key_name}
+    subnet_id                   = "${aws_subnet.ProtectedSubnet1.id}"
+   # vpc_security_group_ids      = [aws_security_group.SG_Public.id]
     associate_public_ip_address = true
-    private_ip                  = "172.16.0.50"
+    private_ip                  = "${var.tf_Windows_VM_1_ip}"
     source_dest_check           = true
-
+    
     root_block_device {
         volume_type           = "gp2"
         volume_size           = 8
@@ -18,24 +18,24 @@ resource "aws_instance" "Windows_VM_1" {
     }
 
     tags = {
-        "Name" = "Linux_PublicSub"
+        "Name" = "Win_Protected_VM1"
     }
 }
 
 
 resource "aws_instance" "Windows_VM_2" {
-    ami                         = var.test_amis[var.region]
-    availability_zone           = var.avail-zone-c[var.region]
+    ami                         = "${var.test_amis[var.region]}
+    availability_zone           = "${var.tf_AZForSubnetVM2}"
     ebs_optimized               = false
     instance_type               = "t2.micro"
     monitoring                  = false
-    key_name                    = var.ec2_key_name
-    subnet_id                   = aws_subnet.PrivateSubnet.id
-    vpc_security_group_ids      = [aws_security_group.SG_Private.id]
+    key_name                    = "${var.tf_ec2_key_name}
+    subnet_id                   = "${aws_subnet.ProtectedSubnet2.id}"
+   # vpc_security_group_ids      = [aws_security_group.SG_Public.id]
     associate_public_ip_address = true
-    private_ip                  = "172.16.1.51"
+    private_ip                  = "${var.tf_Windows_VM_2_ip}"
     source_dest_check           = true
-
+    
     root_block_device {
         volume_type           = "gp2"
         volume_size           = 8
@@ -43,7 +43,6 @@ resource "aws_instance" "Windows_VM_2" {
     }
 
     tags = {
-        "Name" = "Linux_PrivateSub"
+        "Name" = "Win_Protected_VM2"
     }
 }
-

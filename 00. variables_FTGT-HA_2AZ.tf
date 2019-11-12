@@ -237,7 +237,7 @@ variable "tf_FortiGate2HAmgmtIP" {
 			description =  "Provide the IP address in CIDR form for the ha management interface of FortiGate2 (IP from HAMgmtSubnet1)"
 		}
         
-variable "ec2_key_name" {
+variable "tf_ec2_key_name" {
  type        = string
  default = "AWS-FTGT"
 }
@@ -273,3 +273,12 @@ variable "tf_ProtectedSubnet2" {
 			default = "10.0.200.0/24"
 			description = "Provide a network CIDR for ProtectedSubnet2"
 		}
+variable "tf_Windows_VM_1_ip" {
+            type = "string"
+            default = "10.0.100.77/24"
+		}
+        
+variable "tf_Windows_VM_2_ip" {
+            type = "string"
+            default = "10.0.200.77/24"   
+        }

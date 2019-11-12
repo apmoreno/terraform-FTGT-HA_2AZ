@@ -39,17 +39,17 @@ resource "aws_cloudformation_stack" "VPC_for_FTGT-HA2AZ" {
 #Now retrieve several parameters that will be needed in "01. main_FTGT_HA2AZ_PAYG.tf": 
 # - the id of the VPC created
 # - the Routing Table id for Public Subnet 2 
-# the id forech of the 8 subnets created 
+# the id for each of the 8 subnets created 
 
 # Routing Table id for Public Subnet 2:
 #1. Retrieve existing VPC id, 2.retrieve id of all subnet  PublicSubnet2, 3.retrieve the id of the route table for this subnet.
 
-data "aws_vpc" "tf_existing_VPC" {
+data "aws_vpc" "loc_existing_VPC" {
   cidr_block = "${var.tf_VPCCIDR}"
   depends_on = [aws_cloudformation_stack.VPC_for_FTGT-HA2AZ]
 }
 output "existing_VPC_id" {
-  value = "${data.aws_vpc.tf_existing_VPC.id}"
+  value = "${data.aws_vpc.loc_existing_VPC.id}"
 }
 
 data "aws_subnet_ids" "find_PublicSubnet2" {
