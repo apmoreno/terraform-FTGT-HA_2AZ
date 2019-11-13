@@ -76,17 +76,30 @@ module "Deploy_FTGT_HA2AZ" {
 	tf_FortiGate2HAmgmtIP = "${var.tf_FortiGate2HAmgmtIP}"
     }
     
-    module "Deploy_EC2_VMs"{
+    output "value_tf_FortiGate1PrivateIP" {
+    value = "${module.Deploy_FTGT_HA2AZ.debug1}" 
+    }
     
-     source = "./3.Deploy_EC2_VMs"
-     region = "${var.region}"
-     tf_windows_amis = "${var.tf_windows_amis}"
-     tf_existing_VPC_id = "${module.Deploy_VPC.existing_VPC_id}"   
-     tf_ProtectedSubnet1 = "${var.tf_ProtectedSubnet1}"
-     tf_AZForSubnetVM1 = "${var.tf_AZForSubnetVM1}"
-     tf_ProtectedSubnet2 = "${var.tf_ProtectedSubnet2}"
-     tf_AZForSubnetVM2 = "${var.tf_AZForSubnetVM2}"
-     tf_ec2_key_name = "${var.tf_ec2_key_name}"
-     tf_Windows_VM_1_ip = "${var.tf_WindowsVM1_ip}"
-     tf_Windows_VM_2_ip = "${var.tf_WindowsVM2_ip}"
+    output "value_tf_FortiGate1PrivateIP_Substring" {
+    value = "${module.Deploy_FTGT_HA2AZ.debug2}" 
+    }
+    
+    output "value_tf_InitS3Bucket" {
+    value = "${module.Deploy_FTGT_HA2AZ.debug3}"
+    }
+    
+    output "value_tf_InitS3BucketRegion" {
+    value = "${module.Deploy_FTGT_HA2AZ.debug4}"
+    }
+    
+    output "value_tf_LicenseType" {
+    value = "${module.Deploy_FTGT_HA2AZ.debug5}"
+    }
+    
+    output "value_tf_FortiGate1LicenseFile" {
+    value = "${module.Deploy_FTGT_HA2AZ.debug6}"
+    }
+    
+    output "value_tf_FortiGate2LicenseFile" {
+    value = "${module.Deploy_FTGT_HA2AZ.debug7}"
     }

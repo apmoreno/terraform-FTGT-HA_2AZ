@@ -53,7 +53,7 @@ output "existing_VPC_id" {
 }
 
 data "aws_subnet_ids" "find_PublicSubnet2" {
-    vpc_id = "${data.aws_vpc.tf_existing_VPC.id}"
+    vpc_id = "${data.aws_vpc.loc_existing_VPC.id}"
   tags = {
  #   Name = "FTGT-HA-2AZs-PublicSubnet2"
     Name ="${var.nameTag}-PublicSubnet2"
@@ -70,7 +70,7 @@ output "tf_PublicSubnet2RouteTableID" {
 }
 
 output "nameTag_VPC"{
-    value = "${lookup(data.aws_vpc.tf_existing_VPC.tags, "Name","")}"
+    value = "${lookup(data.aws_vpc.loc_existing_VPC.tags, "Name","")}"
 }
 
 output "tf_PublicSubnet2ID" {

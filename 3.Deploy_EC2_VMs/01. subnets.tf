@@ -1,4 +1,4 @@
-resource "aws_subnet" "ProtectedSubnet1" {
+resource "aws_subnet" "loc_ProtectedSubnet1" {
     vpc_id                  = "${var.tf_existing_VPC_id}"
     cidr_block              = "${var.tf_ProtectedSubnet1}"
     availability_zone       = "${var.tf_AZForSubnetVM1}"
@@ -9,7 +9,7 @@ resource "aws_subnet" "ProtectedSubnet1" {
     }
 }
 
-resource "aws_subnet" "ProtectedSubnet2" {
+resource "aws_subnet" "loc_ProtectedSubnet2" {
     vpc_id                  = "${var.tf_existing_VPC_id}"
     cidr_block              = "${var.tf_ProtectedSubnet2}"
     availability_zone       = "${var.tf_AZForSubnetVM2}"
@@ -17,6 +17,5 @@ resource "aws_subnet" "ProtectedSubnet2" {
 
     tags = {
         "Name" : "ProtectedSubnet2"
-    
+    }
 }
-

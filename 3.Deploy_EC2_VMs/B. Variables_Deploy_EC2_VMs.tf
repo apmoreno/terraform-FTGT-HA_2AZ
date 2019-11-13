@@ -23,7 +23,7 @@ variable "tf_AZForSubnet2" {
   type = "string"
 }
 
-variable "tf_ec2_key_name" {
+variable "tf_KeyPair" {
 type        = string
   default   = ""
 }
@@ -49,12 +49,12 @@ variable "tf_ProtectedSubnet2" {
             description = "Provide a network CIDR for ProtectedSubnet2"
             }
             
-variable "tf_Windows_VM_1_ip" {
+variable "tf_WindowsVM1_ip" {
             type = "string"
             default = ""
 		}
         
-        variable "tf_Windows_VM_2_ip" {
+        variable "tf_WindowsVM2_ip" {
             type = "string"
             default = ""
 		}

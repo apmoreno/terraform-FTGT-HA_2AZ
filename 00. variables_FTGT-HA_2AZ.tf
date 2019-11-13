@@ -236,20 +236,21 @@ variable "tf_FortiGate2HAmgmtIP" {
 			default =  "10.0.40.10/24"
 			description =  "Provide the IP address in CIDR form for the ha management interface of FortiGate2 (IP from HAMgmtSubnet1)"
 		}
-        
-variable "tf_ec2_key_name" {
- type        = string
- default = "AWS-FTGT"
-}
 
 variable "test_amis" {
   type = "map"
   default = {
-    "us-east-1" = "ami-b374d5a5"
+    "us-east-1" = "ami-0d4df21ffeb914d61"
     "us-west-2" = "ami-4b32be2b"
     "us-east-2" = "ami-02bcbb802e03574ba"
   }
 }
+
+
+#"Windows_Server-2019-English-Full-Base-2019.10.09", 
+#    "Windows_Server-2019-English-STIG-Full-2019.10.09", 
+#    "Windows_Server-2019-English-Core-Base-2019.10.09", 
+
 
 variable "tf_AZForSubnetVM1" {
             default = "us-east-1a"
@@ -273,12 +274,12 @@ variable "tf_ProtectedSubnet2" {
 			default = "10.0.200.0/24"
 			description = "Provide a network CIDR for ProtectedSubnet2"
 		}
-variable "tf_Windows_VM_1_ip" {
+variable "tf_WindowsVM1_ip" {
             type = "string"
             default = "10.0.100.77/24"
 		}
         
-variable "tf_Windows_VM_2_ip" {
+variable "tf_WindowsVM2_ip" {
             type = "string"
             default = "10.0.200.77/24"   
         }
