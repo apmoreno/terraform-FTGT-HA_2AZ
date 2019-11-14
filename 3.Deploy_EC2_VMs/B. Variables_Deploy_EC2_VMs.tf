@@ -7,21 +7,21 @@ variable "tf_existing_VPC_id" {
   type = "string"
 }
 
-variable "test_amis" {
+variable "tf_windows_amis" {
   type = "map"
 }
 
-variable "tf_VPCCIDR" {
-  type = "string"
-}
+#variable "tf_VPCCIDR" {
+#  type = "string"
+#}
 
-variable "tf_AZForSubnet1" {
-  type = "string"
-}
+#variable "tf_AZForSubnet1" {
+#  type = "string"
+#}
 
-variable "tf_AZForSubnet2" {
-  type = "string"
-}
+#variable "tf_AZForSubnet2" {
+#  type = "string"
+#}
 
 variable "tf_KeyPair" {
 type        = string

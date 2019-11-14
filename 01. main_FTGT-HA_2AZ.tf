@@ -86,7 +86,7 @@ module "Deploy_FTGT_HA2AZ" {
      tf_AZForSubnetVM1 = "${var.tf_AZForSubnetVM1}"
      tf_ProtectedSubnet2 = "${var.tf_ProtectedSubnet2}"
      tf_AZForSubnetVM2 = "${var.tf_AZForSubnetVM2}"
-     tf_ec2_key_name = "${var.tf_ec2_key_name}"
-     tf_Windows_VM_1_ip = "${var.tf_WindowsVM1_ip}"
-     tf_Windows_VM_2_ip = "${var.tf_WindowsVM2_ip}"
+     tf_KeyPair = "${var.tf_KeyPair}"
+     tf_WindowsVM1_ip = "${var.tf_WindowsVM1_ip}"
+     tf_WindowsVM2_ip = "${var.tf_WindowsVM2_ip}"
     }

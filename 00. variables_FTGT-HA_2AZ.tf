@@ -18,7 +18,35 @@ provider "aws" {
 variable "region" {
   type        = string
   default     = "us-east-1"
+  # Possible values:
+  # us-east-2
+  # us-east-1
+  # us-west-1
+  # us-west-2
+  # ap-east-1 <- Not Supported !
+  # ap-south-1
+  # ap-northeast-3 <- Not Supported !
+  # ap-northeast-2
+  # ap-southeast-1
+  # ap-southeast-2
+  # ap-northeast-1
+  # ca-central-1
+  # cn-north-1 <- Not Supported !
+  # cn-northwest-1 <- Not Supported !
+  # eu-central-1
+  # eu-west-1
+  # eu-west-2
+  # eu-west-3
+  # eu-north-1
+  # me-south-1
+  # sa-east-1
+  # us-gov-east-1 <- Not Supported !
+  # us-gov-east-1 <- Not Supported !
+  # us-gov-west-1
 }
+
+
+
 
 variable "tf_StackLabel" {
 			default = "FTGT-HA-2AZs"
@@ -237,12 +265,34 @@ variable "tf_FortiGate2HAmgmtIP" {
 			description =  "Provide the IP address in CIDR form for the ha management interface of FortiGate2 (IP from HAMgmtSubnet1)"
 		}
 
-variable "test_amis" {
+variable "tf_windows_amis" {
   type = "map"
   default = {
     "us-east-1" = "ami-0d4df21ffeb914d61"
-    "us-west-2" = "ami-4b32be2b"
-    "us-east-2" = "ami-02bcbb802e03574ba"
+    "us-west-1" = "ami-05f5b1fdbdbc92ec7"
+    "us-east-2" = "ami-085a6b327e41e6912"
+    "us-west-2" = "ami-0bff712af642c77c9"
+#   "ap-east-1"  UNSUPPORTED
+    "ap-south-1" = "ami-07b1360b71c3716d8"
+#   "ap-northeast-3"  UNSUPPORTED
+    "ap-northeast-2" = "ami-0fd7175b57c51b752"
+    "ap-southeast-1" = "ami-00534e787c8349c76"
+    "ap-southeast-2" = "ami-0f307b7625bd712cd"
+    "ap-northeast-1" = "ami-0e48df3801c3e668e"
+    "ca-central-1" = "ami-0054a87febcce8612"
+ #  "cn-north-1"  UNSUPPORTED
+ #  "cn-northwest-1"   UNSUPPORTED
+    "eu-central-1" = "ami-034937fd7f621ba85"
+    "eu-west-1" = "ami-0c143cb48fa7c1ec9"
+    "eu-west-2" = "ami-06ea28ca18bb79e3c"
+    "eu-west-3" = "ami-0ba894c68b1681e24"
+    "eu-north-1" = "ami-09b605f903aef31cd"
+    "me-south-1" = "ami-083a1092752dd42df"
+    "sa-east-1" = "ami-05b2ce93b518cf8ee"
+ #  "us-gov-east-1"   UNSUPPORTED
+ #  "us-gov-west-1"  UNSUPPORTED
+
+    
   }
 }
 
@@ -276,10 +326,10 @@ variable "tf_ProtectedSubnet2" {
 		}
 variable "tf_WindowsVM1_ip" {
             type = "string"
-            default = "10.0.100.77/24"
+            default = "10.0.100.77"
 		}
         
 variable "tf_WindowsVM2_ip" {
             type = "string"
-            default = "10.0.200.77/24"   
+            default = "10.0.200.77"   
         }

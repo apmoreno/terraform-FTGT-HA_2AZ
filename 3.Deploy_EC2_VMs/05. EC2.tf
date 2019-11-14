@@ -13,7 +13,7 @@ resource "aws_instance" "Windows_VM_1" {
     
     root_block_device {
         volume_type           = "gp2"
-        volume_size           = 8
+        volume_size           = 30
         delete_on_termination = true
     }
 
@@ -38,7 +38,7 @@ resource "aws_instance" "Windows_VM_2" {
     
     root_block_device {
         volume_type           = "gp2"
-        volume_size           = 8
+        volume_size           = 30
         delete_on_termination = true
     }
 
