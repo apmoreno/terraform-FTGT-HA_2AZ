@@ -23,16 +23,12 @@ variable "region" {
   # us-east-1
   # us-west-1
   # us-west-2
-  # ap-east-1 <- Not Supported !
   # ap-south-1
-  # ap-northeast-3 <- Not Supported !
   # ap-northeast-2
   # ap-southeast-1
   # ap-southeast-2
   # ap-northeast-1
   # ca-central-1
-  # cn-north-1 <- Not Supported !
-  # cn-northwest-1 <- Not Supported !
   # eu-central-1
   # eu-west-1
   # eu-west-2
@@ -41,8 +37,11 @@ variable "region" {
   # me-south-1
   # sa-east-1
   # us-gov-east-1 <- Not Supported !
-  # us-gov-east-1 <- Not Supported !
-  # us-gov-west-1
+  # us-gov-west-1 <- Not Supported !
+  # ap-northeast-3 <- Not Supported !
+  # ap-east-1 <- Not Supported !
+  # cn-north-1 <- Not Supported !
+  # cn-northwest-1 <- Not Supported !
 }
 
 

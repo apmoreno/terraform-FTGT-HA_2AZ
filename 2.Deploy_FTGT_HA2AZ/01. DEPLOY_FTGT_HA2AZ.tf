@@ -59,7 +59,7 @@ resource "aws_cloudformation_stack" "DEPLOY_FTGT-HA2AZ" {
         "Name" : "FTGT-HA2AZ_DEPLOY"
     }
   
-  template_url="https://apollinaire-ftgt-ha-2az-template.s3.amazonaws.com/FGCP_DualAZ_ExistingVPC.template.json"
+  template_url="https://apollinaire-ftgt-ha-2az-template.s3.amazonaws.com/FGCP_DualAZ_ExistingVPC.template_AM.json"
 } 
 
 
