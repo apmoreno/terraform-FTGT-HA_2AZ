@@ -74,6 +74,8 @@ module "Deploy_FTGT_HA2AZ" {
 	tf_FortiGate2PrivateIP = "${var.tf_FortiGate2PrivateIP}"
 	tf_FortiGate2HAsyncIP = "${var.tf_FortiGate2HAsyncIP}"
 	tf_FortiGate2HAmgmtIP = "${var.tf_FortiGate2HAmgmtIP}"
+    tf_WindowsVM1ip = "${var.tf_WindowsVM1ip}"
+    tf_WindowsVM2ip = "${var.tf_WindowsVM2ip}"
     }
     
     module "Deploy_EC2_VMs"{
@@ -87,6 +89,10 @@ module "Deploy_FTGT_HA2AZ" {
      tf_ProtectedSubnet2 = "${var.tf_ProtectedSubnet2}"
      tf_AZForSubnetVM2 = "${var.tf_AZForSubnetVM2}"
      tf_KeyPair = "${var.tf_KeyPair}"
-     tf_WindowsVM1_ip = "${var.tf_WindowsVM1_ip}"
-     tf_WindowsVM2_ip = "${var.tf_WindowsVM2_ip}"
+     tf_WindowsVM1ip = "${var.tf_WindowsVM1ip}"
+     tf_WindowsVM2ip = "${var.tf_WindowsVM2ip}"
+    }
+    
+    output "value_default_VM1_SG" {
+    value = "${module.Deploy_EC2_VMs.SG_ids}"
     }

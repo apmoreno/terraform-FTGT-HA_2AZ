@@ -46,7 +46,9 @@ resource "aws_cloudformation_stack" "DEPLOY_FTGT-HA2AZ" {
 	"FortiGate2PrivateIP" = "${var.tf_FortiGate2PrivateIP}"
 	"FortiGate2HAsyncIP" = "${var.tf_FortiGate2HAsyncIP}"
 	"FortiGate2HAmgmtIP" = "${var.tf_FortiGate2HAmgmtIP}"
-  }
+    "WindowsVM1ip" = "${var.tf_WindowsVM1ip}"
+    "WindowsVM2ip" = "${var.tf_WindowsVM2ip}"  
+    }
   
   on_failure = "ROLLBACK"
   

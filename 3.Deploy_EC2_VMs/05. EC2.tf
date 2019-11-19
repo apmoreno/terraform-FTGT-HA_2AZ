@@ -8,7 +8,7 @@ resource "aws_instance" "Windows_VM_1" {
     subnet_id                   = "${aws_subnet.loc_ProtectedSubnet1.id}"
    # vpc_security_group_ids      = [aws_security_group.SG_Public.id]
     associate_public_ip_address = true
-    private_ip                  = "${var.tf_WindowsVM1_ip}"
+    private_ip                  = "${var.tf_WindowsVM1ip}"
     source_dest_check           = true
     
     root_block_device {
@@ -33,7 +33,7 @@ resource "aws_instance" "Windows_VM_2" {
     subnet_id                   = "${aws_subnet.loc_ProtectedSubnet2.id}"
    # vpc_security_group_ids      = [aws_security_group.SG_Public.id]
     associate_public_ip_address = true
-    private_ip                  = "${var.tf_WindowsVM2_ip}"
+    private_ip                  = "${var.tf_WindowsVM2ip}"
     source_dest_check           = true
     
     root_block_device {
@@ -45,4 +45,8 @@ resource "aws_instance" "Windows_VM_2" {
     tags = {
         "Name" = "Win_Protected_VM2"
     }
+}
+
+output "SG_ids" {
+  value = "${aws_instance.Windows_VM_1.vpc_security_group_ids}"
 }

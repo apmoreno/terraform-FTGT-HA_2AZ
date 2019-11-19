@@ -49,12 +49,12 @@ variable "tf_ProtectedSubnet2" {
             description = "Provide a network CIDR for ProtectedSubnet2"
             }
             
-variable "tf_WindowsVM1_ip" {
+variable "tf_WindowsVM1ip" {
             type = "string"
             default = ""
 		}
         
-        variable "tf_WindowsVM2_ip" {
+        variable "tf_WindowsVM2ip" {
             type = "string"
             default = ""
 		}

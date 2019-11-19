@@ -45,7 +45,9 @@
 						"HAMgmtSubnet1RouterIP",
 						"PublicSubnet2RouterIP",
 						"PrivateSubnet2RouterIP",
-						"HAMgmtSubnet2RouterIP"
+						"HAMgmtSubnet2RouterIP",
+                        "WindowsVM1ip",
+                        "WindowsVM2ip"
 					]
 				},
 				{
@@ -292,8 +294,19 @@
 		"FortiGate2LicenseFile": {
 			"Type": "String",
 			"Description": "[BYOL Only, leave blank for PAYG] Provide the name of the BYOL license file in the Init S3 Bucket for FortiGate2 (ie fgt2.lic or prefix/fgt2.lic)"
-		}
-	},
+		},
+    "WindowsVM1ip": {
+			"Type": "String",
+			"Default": "10.0.100.77",
+			"Description": "Provide the ip address of the 1st of 2 Windows servers"
+		},      
+    "WindowsVM2ip": {
+			"Type": "String",
+			"Default": "10.0.200.77",
+			"Description": "Provide the ip address of the 2nd of 2 Windows servers"
+		}        
+    },
+    
 	"Conditions": {
 		"CreateS3Endpoint": {
 			"Fn::Equals": [
@@ -1330,6 +1343,26 @@
 								"set service ALL",
 								"set logtraffic all",
 								"next",
+                                "edit 3",
+                                "config firewall vip",
+                                "edit RDP_VM1",
+                                "set extintf port1",
+                                "set portforward enable",
+                                "set mappedip {WindowsVM1ip}",
+                                "set extport 3389",
+                                "set mappedport 3389",
+                                "next",
+                                "edit 4",
+                                "set name RDP_WIN_1",
+                                "set srcintf port1",
+                                "set dstintf port2",
+                                "set srcaddr all",
+                                "set dstaddr RDP_VM1",
+                                "set action accept",
+                                "set schedule always",
+                                "set service ALL",
+                                "set fsso disable",
+                                "next",
 								"end",
 								"config system ha",
 								"set group-name group1",

@@ -323,12 +323,12 @@ variable "tf_ProtectedSubnet2" {
 			default = "10.0.200.0/24"
 			description = "Provide a network CIDR for ProtectedSubnet2"
 		}
-variable "tf_WindowsVM1_ip" {
+variable "tf_WindowsVM1ip" {
             type = "string"
             default = "10.0.100.77"
 		}
         
-variable "tf_WindowsVM2_ip" {
+variable "tf_WindowsVM2ip" {
             type = "string"
             default = "10.0.200.77"   
         }

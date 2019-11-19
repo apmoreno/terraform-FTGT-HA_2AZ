@@ -144,4 +144,9 @@ variable "tf_FortiGate2HAsyncIP" {
 variable "tf_FortiGate2HAmgmtIP" {
   type = string
 		}
-        
+  variable "tf_WindowsVM1ip" {
+            type = "string"
+		}        
+variable "tf_WindowsVM2ip" {
+            type = "string"
+        }      
