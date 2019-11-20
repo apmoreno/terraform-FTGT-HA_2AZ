@@ -13,8 +13,7 @@ terraform {
 
 module "Deploy_VPC" {
     
-  source = "./1.Deploy_VPC"
-  
+  source = "./1.Deploy_VPC" 
   region = "${var.region}"
   nameTag = "VPC-${var.tf_StackLabel}${formatdate("-YYYY-MM-DD-hh-mm", timestamp())}"
   tf_StackLabel = "${var.tf_StackLabel}"
@@ -36,7 +35,7 @@ module "Deploy_FTGT_HA2AZ" {
     
     source = "./2.Deploy_FTGT_HA2AZ"
     region = "${var.region}"
-    nameTag = "Deploy-${var.tf_StackLabel}${formatdate("-YYYY-MM-DD-hh-mm", timestamp())}"
+    nameTag = "${var.tf_StackLabel}${formatdate("-YYYY-MM-DD-hh-mm", timestamp())}"
     tf_existing_VPC_id = "${module.Deploy_VPC.existing_VPC_id}"   
     tf_VPCCIDR = "${var.tf_VPCCIDR}"
     tf_AZForSubnet1 = "${var.tf_AZForSubnet1}"
@@ -93,6 +92,3 @@ module "Deploy_FTGT_HA2AZ" {
      tf_WindowsVM2ip = "${var.tf_WindowsVM2ip}"
     }
     
-    output "value_default_VM1_SG" {
-    value = "${module.Deploy_EC2_VMs.SG_ids}"
-    }

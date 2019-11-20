@@ -32,3 +32,6 @@ module "Deploy_VPC" {
  
 }
 
+output "value_id_Default_SG" {
+    value = "${module.Deploy_VPC.default_SG}" 
+    }

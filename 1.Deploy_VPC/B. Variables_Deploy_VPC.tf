@@ -7,10 +7,6 @@ variable "tf_StackLabel" {
   type        = string
 		}
 
-#locals {
-#nameTag = "${var.tf_StackLabel}${formatdate("-YYYY-MM-DD-hh-mm", timestamp())}"
-#} 
-
 variable "nameTag" {
   type = "string"
 }      

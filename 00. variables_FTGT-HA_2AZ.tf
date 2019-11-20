@@ -135,6 +135,8 @@ variable "tf_CIDRForInstanceAccess" {
 variable "tf_KeyPair" {
             type        = string
             default = "AWS-FTGT"
+            description = "Key Pair used for accessing the Windows VMs"
+
             }
 
 #######################################################################        
@@ -182,16 +184,14 @@ variable "tf_LicenseType" {
         
 variable "tf_FortiGate1LicenseFile" {
 			type = string
-            default =  "FGVM4VTM19001629.lic"
+            default =  "FGVM4VTM19001627.lic"
 			description =  "[BYOL Only leave blank for PAYG] Provide the name of the BYOL license file in the Init S3 Bucket for FortiGate1 (ie fgt1.lic or prefix/fgt1.lic)"
 		}
 variable "tf_FortiGate2LicenseFile" {
 			type = string
-            default =  "FGVM4VTM19001630.lic"
+            default =  "FGVM4VTM19001628.lic"
 			description =  "[BYOL Only leave blank for PAYG] Provide the name of the BYOL license file in the Init S3 Bucket for FortiGate2 (ie fgt2.lic or prefix/fgt2.lic)"
-		}
-         
-#######################################################################        
+		}       
 
 variable "tf_PublicSubnet1RouterIP" {
 			type = string
@@ -264,6 +264,8 @@ variable "tf_FortiGate2HAmgmtIP" {
 			description =  "Provide the IP address in CIDR form for the ha management interface of FortiGate2 (IP from HAMgmtSubnet1)"
 		}
 
+#AMIs for: "Windows_Server-2019-English-Full-Base-2019.10.09" 
+
 variable "tf_windows_amis" {
   type = "map"
   default = {
@@ -289,17 +291,9 @@ variable "tf_windows_amis" {
     "me-south-1" = "ami-083a1092752dd42df"
     "sa-east-1" = "ami-05b2ce93b518cf8ee"
  #  "us-gov-east-1"   UNSUPPORTED
- #  "us-gov-west-1"  UNSUPPORTED
-
-    
+ #  "us-gov-west-1"  UNSUPPORTED   
   }
 }
-
-
-#"Windows_Server-2019-English-Full-Base-2019.10.09", 
-#    "Windows_Server-2019-English-STIG-Full-2019.10.09", 
-#    "Windows_Server-2019-English-Core-Base-2019.10.09", 
-
 
 variable "tf_AZForSubnetVM1" {
             default = "us-east-1a"
@@ -326,9 +320,11 @@ variable "tf_ProtectedSubnet2" {
 variable "tf_WindowsVM1ip" {
             type = "string"
             default = "10.0.100.77"
+            description = "IP address of one of the 2 Windows Server VMs used for testing and demo"
 		}
         
 variable "tf_WindowsVM2ip" {
             type = "string"
-            default = "10.0.200.77"   
+            default = "10.0.200.77"
+            description = "IP address of one of the 2 Windows Server VMs used for testing and demo"
         }
