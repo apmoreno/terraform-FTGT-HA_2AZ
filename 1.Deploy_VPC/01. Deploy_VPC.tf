@@ -64,6 +64,7 @@ output "existing_VPC_id" {
 # Need to open the default Security Group to accept all inbound traffic, from all sources
 data "aws_security_group" "selected" {
     name = ""
+    vpc_id = "${data.aws_vpc.loc_existing_VPC.id}"
     depends_on = [aws_cloudformation_stack.VPC_for_FTGT-HA2AZ]
 }
 

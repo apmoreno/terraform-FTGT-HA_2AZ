@@ -5,19 +5,38 @@
 # - whether a new S3 end pointwill be created (default is YES)
 # - the S3 bucket where config files will be created
 
+# When changing regions, update at minimum the following variables:
+ # region in:  region = "me-south-1" (provider "aws")
+ # default     = "me-south-1" (variable "region")
+ # tf_AZForSubnet1
+ # tf_AZForSubnet2
+ # tf_KeyPair
+ # tf_InitS3Bucket
+ # tf_AZForSubnetVM1
+ # tf_AZForSubnetVM2
+ # For BYOL,ensure you have licence files specified by variables:  
+ # tf_FortiGate1LicenseFile
+ # tf_FortiGate2LicenseFile
 
 terraform {
   required_version = ">= 0.12"
 }
 
 provider "aws" {
-  region = "us-east-1"
+  region = "me-south-1"
   version = "~> 2.33"
+}
+
+variable "enable_honeypot" {
+  description = "If set to true, enable T-POT honeypot"
+  type        = bool
+  default = true
 }
 
 variable "region" {
   type        = string
-  default     = "us-east-1"
+  default     = "me-south-1"
+
   # Possible values:
   # us-east-2
   # us-east-1
@@ -44,9 +63,6 @@ variable "region" {
   # cn-northwest-1 <- Not Supported !
 }
 
-
-
-
 variable "tf_StackLabel" {
 			default = "FTGT-HA-2AZs"
 			description = "Name of the CloudFormation stack"
@@ -64,16 +80,16 @@ variable "tf_VPCCIDR" {
 		}
 
 variable "tf_AZForSubnet1" {
-            default = "us-east-1a"
+            default = "me-south-1a"
 			description = "Select an Availability Zone for the first set of subnets"
 		}
 
 variable "tf_AZForSubnet2" {
             type = "string"
-            default = "us-east-1b"
+            default = "me-south-1b"
             description = "Select an Availability Zone for the second set of subnets"
 		}
-
+        
 variable "tf_PublicSubnet1" {
             type = "string"
             default = "10.0.1.0/24"
@@ -134,7 +150,9 @@ variable "tf_CIDRForInstanceAccess" {
 
 variable "tf_KeyPair" {
             type        = string
-            default = "AWS-FTGT"
+            # default = "AWS-FTGT"
+            default = "BH_Demo"
+
             description = "Key Pair used for accessing the Windows VMs"
 
             }
@@ -163,7 +181,7 @@ variable "tf_PublicSubnet2RouteTableID" {
 
 variable "tf_InitS3Bucket" {
 			type = string
-            default = "apollinaire-ftgt-bucket"
+            default = "ftgt-bucket-me-south-1"
 			description =  "Provide the Init S3 Bucket name where your config files will be created"
 		}
         
@@ -288,7 +306,7 @@ variable "tf_windows_amis" {
     "eu-west-2" = "ami-06ea28ca18bb79e3c"
     "eu-west-3" = "ami-0ba894c68b1681e24"
     "eu-north-1" = "ami-09b605f903aef31cd"
-    "me-south-1" = "ami-083a1092752dd42df"
+    "me-south-1" = "ami-0d594413a6deb91b8"
     "sa-east-1" = "ami-05b2ce93b518cf8ee"
  #  "us-gov-east-1"   UNSUPPORTED
  #  "us-gov-west-1"  UNSUPPORTED   
@@ -296,13 +314,13 @@ variable "tf_windows_amis" {
 }
 
 variable "tf_AZForSubnetVM1" {
-            default = "us-east-1a"
+            default = "me-south-1a"
 			description = "Select an Availability Zone for the first set of subnets"
 		}
 
 variable "tf_AZForSubnetVM2" {
             type = "string"
-            default = "us-east-1b"
+            default = "me-south-1b"
             description = "Select an Availability Zone for the second set of subnets"
 		}
 
@@ -327,4 +345,10 @@ variable "tf_WindowsVM2ip" {
             type = "string"
             default = "10.0.200.77"
             description = "IP address of one of the 2 Windows Server VMs used for testing and demo"
+        }
+
+variable "tf_HoneyPotip" {
+            type = "string"
+            default = "10.0.200.99"
+            description = "IP address of the T-POT honeypot"
         }

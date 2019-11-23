@@ -2,7 +2,7 @@ resource "aws_instance" "Windows_VM_1" {
     ami                         = "${var.tf_windows_amis[var.region]}"
     availability_zone           = "${var.tf_AZForSubnetVM1}"
     ebs_optimized               = false
-    instance_type               = "t2.micro"
+    instance_type               = "t3.micro"
     monitoring                  = false
     key_name                    = "${var.tf_KeyPair}"
     subnet_id                   = "${aws_subnet.loc_ProtectedSubnet1.id}"
@@ -27,7 +27,7 @@ resource "aws_instance" "Windows_VM_2" {
     ami                         = "${var.tf_windows_amis[var.region]}"
     availability_zone           = "${var.tf_AZForSubnetVM2}"
     ebs_optimized               = false
-    instance_type               = "t2.micro"
+    instance_type               = "t3.micro"
     monitoring                  = false
     key_name                    = "${var.tf_KeyPair}"
     subnet_id                   = "${aws_subnet.loc_ProtectedSubnet2.id}"

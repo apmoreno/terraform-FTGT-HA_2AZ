@@ -1,6 +1,5 @@
 variable "region" {
   type        = string
-  default     = ""
 }
 
 variable "tf_existing_VPC_id" {
