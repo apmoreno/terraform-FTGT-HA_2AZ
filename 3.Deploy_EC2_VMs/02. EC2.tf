@@ -6,8 +6,9 @@ resource "aws_instance" "Windows_VM_1" {
     monitoring                  = false
     key_name                    = "${var.tf_KeyPair}"
     subnet_id                   = "${aws_subnet.loc_ProtectedSubnet1.id}"
-   # vpc_security_group_ids      = [aws_security_group.SG_Public.id]
-    associate_public_ip_address = true
+#   vpc_security_group_ids      = [aws_security_group.SG_Public.id]
+#   associate_public_ip_address = true
+    associate_public_ip_address = false
     private_ip                  = "${var.tf_WindowsVM1ip}"
     source_dest_check           = true
     
@@ -32,7 +33,8 @@ resource "aws_instance" "Windows_VM_2" {
     key_name                    = "${var.tf_KeyPair}"
     subnet_id                   = "${aws_subnet.loc_ProtectedSubnet2.id}"
    # vpc_security_group_ids      = [aws_security_group.SG_Public.id]
-    associate_public_ip_address = true
+   associate_public_ip_address = true
+#    associate_public_ip_address = false    
     private_ip                  = "${var.tf_WindowsVM2ip}"
     source_dest_check           = true
     

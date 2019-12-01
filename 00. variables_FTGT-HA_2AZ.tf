@@ -23,7 +23,8 @@ terraform {
 }
 
 provider "aws" {
-  region = "me-south-1"
+#  region = "me-south-1"
+  region ="us-east-1"
   version = "~> 2.33"
 }
 
@@ -35,7 +36,8 @@ variable "enable_honeypot" {
 
 variable "region" {
   type        = string
-  default     = "me-south-1"
+#  default     = "me-south-1"
+  default     = "us-east-1"
 
   # Possible values:
   # us-east-2
@@ -80,14 +82,17 @@ variable "tf_VPCCIDR" {
 		}
 
 variable "tf_AZForSubnet1" {
-            default = "me-south-1a"
+            default = "us-east-1a"
+#           default = "me-south-1a"
+           
 			description = "Select an Availability Zone for the first set of subnets"
 		}
 
 variable "tf_AZForSubnet2" {
             type = "string"
-            default = "me-south-1b"
-            description = "Select an Availability Zone for the second set of subnets"
+            default = "us-east-1b"
+#            default = "me-south-1b"
+description = "Select an Availability Zone for the second set of subnets"
 		}
         
 variable "tf_PublicSubnet1" {
@@ -150,8 +155,8 @@ variable "tf_CIDRForInstanceAccess" {
 
 variable "tf_KeyPair" {
             type        = string
-            # default = "AWS-FTGT"
-            default = "BH_Demo"
+            default = "AWS-FTGT"
+            # default = "BH_Demo"
 
             description = "Key Pair used for accessing the Windows VMs"
 
@@ -181,8 +186,9 @@ variable "tf_PublicSubnet2RouteTableID" {
 
 variable "tf_InitS3Bucket" {
 			type = string
-            default = "ftgt-bucket-me-south-1"
-			description =  "Provide the Init S3 Bucket name where your config files will be created"
+            default = "ftgt-bucket-us-east-1"
+#            default = "ftgt-bucket-me-south-1"
+description =  "Provide the Init S3 Bucket name where your config files will be created"
 		}
         
 variable "tf_InitS3BucketRegion" {
@@ -314,13 +320,15 @@ variable "tf_windows_amis" {
 }
 
 variable "tf_AZForSubnetVM1" {
-            default = "me-south-1a"
-			description = "Select an Availability Zone for the first set of subnets"
+            default = "us-east-1a"
+#            default = "me-south-1a"
+            description = "Select an Availability Zone for the first set of subnets"
 		}
 
 variable "tf_AZForSubnetVM2" {
             type = "string"
-            default = "me-south-1b"
+            default = "us-east-1b"
+#            default = "me-south-1b"
             description = "Select an Availability Zone for the second set of subnets"
 		}
 
