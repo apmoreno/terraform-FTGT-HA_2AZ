@@ -23,8 +23,8 @@ terraform {
 }
 
 provider "aws" {
-#  region = "me-south-1"
-  region ="us-east-1"
+region = "me-south-1"
+ # region ="us-east-1"
   version = "~> 2.33"
 }
 
@@ -36,8 +36,8 @@ variable "enable_honeypot" {
 
 variable "region" {
   type        = string
-#  default     = "me-south-1"
-  default     = "us-east-1"
+  default     = "me-south-1"
+ # default     = "us-east-1"
 
   # Possible values:
   # us-east-2
@@ -82,16 +82,16 @@ variable "tf_VPCCIDR" {
 		}
 
 variable "tf_AZForSubnet1" {
-            default = "us-east-1a"
-#           default = "me-south-1a"
+#            default = "us-east-1a"
+          default = "me-south-1a"
            
 			description = "Select an Availability Zone for the first set of subnets"
 		}
 
 variable "tf_AZForSubnet2" {
             type = "string"
-            default = "us-east-1b"
-#            default = "me-south-1b"
+#            default = "us-east-1b"
+            default = "me-south-1b"
 description = "Select an Availability Zone for the second set of subnets"
 		}
         
@@ -145,6 +145,8 @@ variable "tf_HAMgmtSubnet2" {
         
 variable "tf_InstanceType" {
 			default =  "c5.xlarge"
+#          default =  "c5.2xlarge"
+
 			description = "Select the instance type for the FortiGates"
 		}
 variable "tf_CIDRForInstanceAccess" {
@@ -155,8 +157,8 @@ variable "tf_CIDRForInstanceAccess" {
 
 variable "tf_KeyPair" {
             type        = string
-            default = "AWS-FTGT"
-            # default = "BH_Demo"
+          # default = "AWS-FTGT"
+            default = "BH_Demo"
 
             description = "Key Pair used for accessing the Windows VMs"
 
@@ -186,8 +188,8 @@ variable "tf_PublicSubnet2RouteTableID" {
 
 variable "tf_InitS3Bucket" {
 			type = string
-            default = "ftgt-bucket-us-east-1"
-#            default = "ftgt-bucket-me-south-1"
+#            default = "ftgt-bucket-us-east-1"
+          default = "ftgt-bucket-me-south-1"
 description =  "Provide the Init S3 Bucket name where your config files will be created"
 		}
         
@@ -293,42 +295,43 @@ variable "tf_FortiGate2HAmgmtIP" {
 variable "tf_windows_amis" {
   type = "map"
   default = {
-    "us-east-1" = "ami-0d4df21ffeb914d61"
-    "us-west-1" = "ami-05f5b1fdbdbc92ec7"
-    "us-east-2" = "ami-085a6b327e41e6912"
-    "us-west-2" = "ami-0bff712af642c77c9"
+    "us-east-1" = "ami-00cb4c0d60b9476f4"
+    "us-west-1" = "ami-0ed87187d8ca9"
+    "us-east-2" = "ami-067317d2d40fd5919"
+    "us-west-2" = "ami-0d7d80db021ba0d11"
 #   "ap-east-1"  UNSUPPORTED
-    "ap-south-1" = "ami-07b1360b71c3716d8"
+    "ap-south-1" = "ami-07545b3a1f4619f4b"
 #   "ap-northeast-3"  UNSUPPORTED
-    "ap-northeast-2" = "ami-0fd7175b57c51b752"
-    "ap-southeast-1" = "ami-00534e787c8349c76"
-    "ap-southeast-2" = "ami-0f307b7625bd712cd"
+    "ap-northeast-2" = "ami-0c276975654214bf3"
+    "ap-southeast-1" = "ami-03cfcf203483cb4f0"
+    "ap-southeast-2" = "ami-0eb941b8e00feef88"
     "ap-northeast-1" = "ami-0e48df3801c3e668e"
-    "ca-central-1" = "ami-0054a87febcce8612"
+    "ap-northeast-2" = "ami-0c276975654214bf3"
+    "ca-central-1" = "ami-014f55f965f51c865"
  #  "cn-north-1"  UNSUPPORTED
  #  "cn-northwest-1"   UNSUPPORTED
-    "eu-central-1" = "ami-034937fd7f621ba85"
-    "eu-west-1" = "ami-0c143cb48fa7c1ec9"
-    "eu-west-2" = "ami-06ea28ca18bb79e3c"
-    "eu-west-3" = "ami-0ba894c68b1681e24"
-    "eu-north-1" = "ami-09b605f903aef31cd"
-    "me-south-1" = "ami-0d594413a6deb91b8"
-    "sa-east-1" = "ami-05b2ce93b518cf8ee"
+    "eu-central-1" = "ami-0e0564dc8e882f217"
+    "eu-west-1" = "ami-0a174bb076b94a327"
+    "eu-west-2" = "ami-07d5dc48e982cf42d"
+    "eu-west-3" = "ami-0be23ddaab6554f34"
+    "eu-north-1" = "ami-0a5544d5b970b291b"
+    "me-south-1" = "ami-0185a257176511db9"
+    "sa-east-1" = "ami-0a8e06a326feb20e2"
  #  "us-gov-east-1"   UNSUPPORTED
  #  "us-gov-west-1"  UNSUPPORTED   
   }
 }
 
 variable "tf_AZForSubnetVM1" {
-            default = "us-east-1a"
-#            default = "me-south-1a"
+#            default = "us-east-1a"
+            default = "me-south-1a"
             description = "Select an Availability Zone for the first set of subnets"
 		}
 
 variable "tf_AZForSubnetVM2" {
             type = "string"
-            default = "us-east-1b"
-#            default = "me-south-1b"
+#            default = "us-east-1b"
+            default = "me-south-1b"
             description = "Select an Availability Zone for the second set of subnets"
 		}
 

@@ -1,8 +1,7 @@
-
 {
 	"AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "(Edits:  1. added Middle East region (me-south-1) and South Africa (sa-east-1) 2. added firewall policy allowing all traffic in, filtered",
-	"Description": "(v4.1) AWS CFT to deploy a FGCP based Active-Passive HA solution with two FortiGates in two AZs",
+    "Description": "(Edits:  1. added firewall policy allowing all traffic in, filtered 2. added entries for ",
+	"Description": "(v4.2) AWS CFT to deploy a FGCP based Active-Passive HA solution with two FortiGates in two AZs",
 	"Metadata": {
 		"AWS::CloudFormation::Interface": {
 			"ParameterGroups": [
@@ -260,6 +259,7 @@
 			"Type": "String",
 			"Description": "Select the Region where the Init S3 Bucket exists *** the bucket should exist in the same region as this deployment for successful bootstrapping ***",
 			"AllowedValues": [
+				"ap-east-1",
 				"ap-northeast-1",
 				"ap-northeast-2",
 				"ap-south-1",
@@ -271,13 +271,13 @@
 				"eu-west-1",
 				"eu-west-2",
 				"eu-west-3",
+				"me-south-1",
 				"sa-east-1",
 				"us-east-1",
 				"us-east-2",
 				"us-west-1",
-				"us-west-2",
-                "me-south-1"
-            ]
+				"us-west-2"
+			]
 		},
 		"LicenseType": {
 			"Type": "String",
@@ -304,9 +304,8 @@
 			"Type": "String",
 			"Default": "10.0.200.77",
 			"Description": "Provide the ip address of the 2nd of 2 Windows servers"
-		}        
-    },
-    
+		}
+	},
 	"Conditions": {
 		"CreateS3Endpoint": {
 			"Fn::Equals": [
@@ -1193,7 +1192,7 @@
 								"    try:",
 								"        resp = client.describe_images(",
 								"            Filters=[{'Name': 'name', 'Values': [event['ResourceProperties']['LicenseType']]}],",
-								"            Owners=['679593333241']",
+								"            Owners=['679593333241', '464423754048', '211372476111']",
 								"        )",
 								"    except Exception as error:",
 								"        logger.error('<--!! Exception: {}'.format(error))",
@@ -1319,15 +1318,6 @@
 								"set gateway {PrivateSubnetRouterIP}",
 								"next",
 								"end",
-                                "config firewall vip",
-                                "edit RDPVM1",
-                                "set extintf port1",
-                                "set portforward enable",
-                                "set mappedip 10.0.100.77",
-                                "set extport 3389",
-                                "set mappedport 3389",
-                                "next",
-                                "end",            
 								"config firewall policy",
 								"edit 1",
 								"set name outbound-all",
@@ -1341,29 +1331,6 @@
 								"set logtraffic all",
 								"set nat enable",
 								"next",
-                                "edit 2",
-                                "set name RDPWIN1",
-                                "set srcintf port1",
-                                "set dstintf port2",
-                                "set srcaddr all",
-                                "set dstaddr RDPVM1",
-                                "set action accept",
-                                "set schedule always",
-                                "set service ALL",
-                                "set fsso disable",
-                                "next",
-                                "edit 3",
-								"set name inbound-all",
-								"set srcintf port1",
-								"set dstintf port2",
-								"set srcaddr all",
-								"set dstaddr all",
-								"set action accept",
-								"set schedule always",
-								"set service ALL",
-								"set logtraffic all",
-								"next",
-
 								"end",
 								"config system ha",
 								"set group-name group1",
